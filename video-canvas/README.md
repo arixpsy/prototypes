@@ -11,7 +11,6 @@ https://tailwindcss.com/docs/guides/vite
 ```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
-
 ```
 updating tailwind.config
 
