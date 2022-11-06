@@ -26,3 +26,8 @@ module.exports = {
   plugins: [],
 }
 ```
+
+## Notes
+
+https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+https://www.geeksforgeeks.org/how-to-control-fps-with-requestanimationframe/
