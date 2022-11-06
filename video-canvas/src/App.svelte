@@ -2,25 +2,75 @@
   import { onMount } from "svelte";
 
   let video: HTMLVideoElement;
-  let canvas: HTMLCanvasElement;
   let permissions = {
     isLoading: true,
     media: undefined,
   };
+  let cameraSettings: MediaTrackSettings;
+
+  let canvas: HTMLCanvasElement;
+  let canvasHeight: number;
+  let canvasWidth: number;
+  let canvasResolution = "16/9";
+  let canvasFramerate = 30;
+  let fpsInterval, startTime, then, now, elapsed, results;
+  let frameCount = 0;
+  let isDrawing = false;
+
+  const startDrawingVideoToCanvas = (fps: number) => {
+    fpsInterval = 1000 / fps;
+    then = Date.now();
+    startTime = then;
+    if (!isDrawing) {
+      drawVideoToCanvas();
+    }
+    isDrawing = true;
+  };
+
+  const handleCanvasFramerateChange = () => {
+    fpsInterval = 1000 / canvasFramerate;
+    then = Date.now();
+    startTime = then;
+    frameCount = 0;
+    results = "";
+  };
+
+  const toggleCanvasResolution = () => {
+    if (canvasResolution === '16/9') {
+      canvasResolution = '9/16'
+    } else {
+      canvasResolution = '16/9'
+    }
+  }
 
   const drawVideoToCanvas = () => {
-    const ctx = canvas.getContext('2d')
+    requestAnimationFrame(drawVideoToCanvas);
 
-    ctx.drawImage(video, 0 , 0)
-    setTimeout(drawVideoToCanvas, 0)
-  }
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > fpsInterval) {
+      then = now - (elapsed % fpsInterval);
+
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        const { height, width } = canvas;
+        // TODO: Draw image in center of canvas cover full width
+        ctx.drawImage(video, 0, 0, width, height);
+      }
+
+      const sinceStart = now - startTime;
+      const currentFps =
+        Math.round((1000 / (sinceStart / ++frameCount)) * 100) / 100;
+      results = `Elapsed time: ${
+        Math.round((sinceStart / 1000) * 100) / 100
+      } seconds @ ${currentFps} fps`;
+    }
+  };
 
   onMount(() => {
     navigator.mediaDevices
       .getUserMedia({
-        video: {
-          width: 1920, height: 1080
-        },
+        video: true,
         audio: true,
       })
       .then((stream) => {
@@ -28,6 +78,7 @@
           isLoading: false,
           media: stream,
         };
+        cameraSettings = stream.getVideoTracks()[0].getSettings();
       })
       .catch(() => {
         permissions.isLoading = false;
@@ -41,8 +92,8 @@
         audio: true,
       })
       .then((stream) => {
-        video.srcObject = stream
-        drawVideoToCanvas()
+        video.srcObject = stream;
+        startDrawingVideoToCanvas(canvasFramerate);
       });
   }
 </script>
@@ -58,14 +109,49 @@
         <p class="text-lg">Unable to retrieve camera permissions</p>
       </div>
     {:else}
-      <div>
-        <h1 class='text-lg'>Raw video from camera device:</h1>
-        <video bind:this={video} autoplay muted/>
-        <canvas bind:this={canvas} />
+      <div class="grid grid-cols-2">
+        <div>
+          <h1 class="text-lg">Raw video from camera device:</h1>
+          <p class="text-sm">Aspect Ratio: {cameraSettings.aspectRatio}</p>
+          <p class="text-sm">
+            Resolution: {cameraSettings.width} / {cameraSettings.height}
+          </p>
+          <p class="text-sm">Frame Rate: {cameraSettings.frameRate}</p>
+          <video bind:this={video} autoplay muted />
+        </div>
+        <div>
+          <h1 class="text-lg">Canvas Output</h1>
+          <p class="text-sm">
+            Aspect Ratio: <span
+              class="text-blue-600"
+              on:click={toggleCanvasResolution}>{canvasResolution}</span
+            >
+          </p>
+          <p class="text-sm">
+            Canvas element size: {canvasWidth} / {canvasHeight}
+          </p>
+          <p class="text-sm">
+            Frame Rate: <input
+              type="number"
+              bind:value={canvasFramerate}
+              on:change={handleCanvasFramerateChange}
+            />
+          </p>
+          <p class="text-sm">{results}</p>
+          <canvas
+            bind:this={canvas}
+            bind:clientHeight={canvasHeight}
+            bind:clientWidth={canvasWidth}
+            style={`aspect-ratio: ${canvasResolution};`}
+          />
+        </div>
       </div>
     {/if}
   </div>
 </main>
 
 <style>
+  canvas {
+    width: 100%;
+  }
 </style>
