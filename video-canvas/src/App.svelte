@@ -36,12 +36,12 @@
   };
 
   const toggleCanvasResolution = () => {
-    if (canvasResolution === '16/9') {
-      canvasResolution = '9/16'
+    if (canvasResolution === "16/9") {
+      canvasResolution = "9/16";
     } else {
-      canvasResolution = '16/9'
+      canvasResolution = "16/9";
     }
-  }
+  };
 
   const drawVideoToCanvas = () => {
     requestAnimationFrame(drawVideoToCanvas);
@@ -53,9 +53,29 @@
 
       if (canvas) {
         const ctx = canvas.getContext("2d");
-        const { height, width } = canvas;
-        // TODO: Draw image in center of canvas cover full width
-        ctx.drawImage(video, 0, 0, width, height);
+        ctx.imageSmoothingQuality = 'high'
+        const { height: cHeight, width: cWidth } = canvas;
+        const { height: vHeight, width: vWidth } = cameraSettings;
+
+        const ratio = cWidth / cHeight;
+        const x_of_video = 0;
+
+        const target_width = vWidth;
+        const target_height = vWidth / ratio;
+        const y_of_video = (vHeight - target_height) / 2;
+
+        ctx.drawImage(
+          video,
+          x_of_video,
+          y_of_video,
+          target_width,
+          target_height,
+          0,
+          0,
+          cWidth,
+          cHeight
+        );
+        
       }
 
       const sinceStart = now - startTime;
