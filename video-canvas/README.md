@@ -1,20 +1,24 @@
 # Project Setup
 
+Project created using vite
+
 ```bash
 yarn create vite
 ```
 
-# Installing Tailwind
+## Installing Tailwind
 
-https://tailwindcss.com/docs/guides/vite
+Reference: https://tailwindcss.com/docs/guides/vite
 
 ```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
-updating tailwind.config
+
 
 ```js
+// tailwind.config.cjs
+
 module.exports = {
   content: [
     "./index.html",
@@ -30,4 +34,5 @@ module.exports = {
 ## Notes
 
 https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+
 https://www.geeksforgeeks.org/how-to-control-fps-with-requestanimationframe/
