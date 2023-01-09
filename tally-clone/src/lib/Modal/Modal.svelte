@@ -15,9 +15,9 @@
 <Portal target="body">
   <div class={`fixed inset-0 flex justify-center items-center ${!isVisible && isHiddenClasses}`}>
     <div class='absolute bg-black opacity-50 h-full w-full' />
-    <div class={`absolute bg-neutral-800 rounded-lg w-full h-full md:w-${width} md:h-min flex flex-col`}>
+    <div class={`absolute bg-neutral-800 rounded-lg w-full h-full md:w-${width} md:h-fit md:max-h-full flex flex-col`}>
       <!-- Content -->
-      <div class='p-6 h-full'>
+      <div class='p-6 h-full overflow-auto'>
         <slot />
       </div>
 
