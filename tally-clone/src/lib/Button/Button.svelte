@@ -14,7 +14,7 @@
   
   const buttonContainerClasses = `${
     block ? "w-full" : ""
-  }  px-4 py-3  rounded-lg`;
+  }  px-4 py-3 rounded-lg transition-colors`;
 
 </script>
 
