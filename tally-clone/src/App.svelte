@@ -1,21 +1,68 @@
 <script lang="ts">
+  import CounterTile from "./lib/CounterTile/CounterTile.svelte";
   import Modal from "./lib/Modal/Modal.svelte";
+  import NewCounterTile from "./lib/NewCounterTile/NewCounterTile.svelte";
 
   let isAddModalOpen = false;
-  const getTrack = [
+  const getCounters = [
     {
       id: 1,
-      title: "",
-      createdAt: "",
-      resetType: "",
-      target: "",
-      groupId: "",
-      color: "",
+      title: "Commits",
+      createdAt: 1673370178,
+      resetType: "month",
+      target: null,
+      groupId: null,
+      color: "bg-slate-400",
       incrementValue: undefined,
       latestRecord: {
-        incrementValue: 0,
-        latestValue: 10,
-        createdAt: "",
+        incrementValue: 1,
+        latestValue: 1,
+        createdAt: 1673370178,
+      },
+    },
+    {
+      id: 2,
+      title: "Commits",
+      createdAt: 1673370178,
+      resetType: "month",
+      target: null,
+      groupId: null,
+      color: "bg-lime-400",
+      incrementValue: undefined,
+      latestRecord: {
+        incrementValue: 1,
+        latestValue: 1,
+        createdAt: 1673370178,
+      },
+    },
+    {
+      id: 3,
+      title: "Commits",
+      createdAt: 1673370178,
+      resetType: "month",
+      target: null,
+      groupId: null,
+      color: "bg-blue-400",
+      incrementValue: undefined,
+      latestRecord: {
+        incrementValue: 1,
+        latestValue: 1,
+        createdAt: 1673370178,
+      },
+    },
+    {
+      id: 4,
+      title: "Commits",
+      createdAt: 1673370178,
+      resetType: "month",
+      target: null,
+      groupId: null,
+      color: "bg-yellow-400",
+      incrementValue: undefined,
+      latestRecord: {
+        incrementValue: 1,
+        latestValue: 1,
+        createdAt: 1673370178,
       },
     },
   ];
@@ -27,63 +74,14 @@
     <div
       class="grid grid-cols-2 gap-6 p-6 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
     >
-      <div
-        class="aspect-square bg-yellow-400 flex flex-col justify-center items-center rounded-lg p-3"
-      >
-        <p class="text-md text-white text-center truncate w-full">Commits</p>
-        <p class="text-xs text-center w-full">This Month</p>
-        <p class="text-4xl text-center font-bold my-2 w-full">4</p>
-        <p class="text-xs text-center w-full">3 days ago</p>
-      </div>
+      {#each getCounters as counter (counter.id)}
+        <CounterTile {counter} />
+      {/each}
 
-      <div
-        class="aspect-square bg-lime-500 flex flex-col justify-center items-center rounded-lg p-3"
-      >
-        <p class="text-md text-white text-center truncate w-full">Commits</p>
-        <p class="text-xs text-center w-full">This Month</p>
-        <p class="text-4xl text-center font-bold my-2 w-full">4</p>
-        <p class="text-xs text-center w-full">3 days ago</p>
-      </div>
-
-      <div
-        class="aspect-square bg-blue-400 flex flex-col justify-center items-center rounded-lg p-3"
-      >
-        <p class="text-md text-white text-center truncate w-full">Commits</p>
-        <p class="text-xs text-center w-full">This Month</p>
-        <p class="text-4xl text-center font-bold my-2 w-full">4</p>
-        <p class="text-xs text-center w-full">3 days ago</p>
-      </div>
-
-      <div
-        class="aspect-square bg-slate-400 flex flex-col justify-center items-center rounded-lg p-3"
-      >
-        <p class="text-md text-white text-center truncate w-full">Commits</p>
-        <p class="text-xs text-center w-full">This Month</p>
-        <p class="text-4xl text-center font-bold my-2 w-full">4</p>
-        <p class="text-xs text-center w-full">3 days ago</p>
-      </div>
-
-      <div
-        class="aspect-square flex flex-col justify-center items-center rounded-lg border-dashed border-gray-500 border-8 text-gray-500"
+      <NewCounterTile
         on:click={() => (isAddModalOpen = true)}
         on:keyup={() => {}}
-      >
-        <svg
-          class="h-20"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
-      </div>
+      />
     </div>
   </div>
 
