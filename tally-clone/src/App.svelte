@@ -1,7 +1,7 @@
 <script lang="ts">
-  import CounterTile from "./lib/CounterTile/CounterTile.svelte";
-  import Modal from "./lib/Modal/Modal.svelte";
-  import NewCounterTile from "./lib/NewCounterTile/NewCounterTile.svelte";
+  import CounterTile from "./lib/components/CounterTile/CounterTile.svelte";
+  import Modal from "./lib/components/Modal/Modal.svelte";
+  import NewCounterTile from "./lib/components/NewCounterTile/NewCounterTile.svelte";
 
   let isAddModalOpen = false;
   const getCounters = [

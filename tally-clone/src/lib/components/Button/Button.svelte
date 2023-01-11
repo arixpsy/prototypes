@@ -14,11 +14,12 @@
   
   const buttonContainerClasses = `px-4 py-3 rounded-lg transition-colors`;
 
+  const buttonClasses = `${buttonContainerClasses} ${buttonTextClasses} ${colorClasses[color]}`
 </script>
 
 <button
   on:click
-  class={`${buttonContainerClasses} ${buttonTextClasses} ${colorClasses[color]}`}
+  class={buttonClasses}
   class:w-full={block}
 >
   {text}
