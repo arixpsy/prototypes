@@ -1,10 +1,17 @@
 <script lang="ts">
   import { DateTime } from "luxon";
-  import type { ICounter } from "./types";
+  import type { ICounter, IRecord } from "../../../utils/types";
 
   export let counter: ICounter;
 
-  $: currentCount = counter.latestRecord.latestValue;
+  let latestRecord: IRecord = {
+    counterId: "test1",
+    incrementValue: 1,
+    latestValue: 1,
+    createdAt: 1673370178,
+  };
+
+  $: currentCount = latestRecord.latestValue;
   $: counterTypeLabel = (() => {
     switch (counter.resetType) {
       case "day":
@@ -13,7 +20,9 @@
         return `This ${counter.resetType}`;
     }
   })();
-  $: LastRecordLabel = DateTime.fromSeconds(counter.latestRecord.createdAt).toRelativeCalendar()
+  $: LastRecordLabel = DateTime.fromSeconds(
+    latestRecord.createdAt
+  ).toRelativeCalendar();
 </script>
 
 <div
