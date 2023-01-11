@@ -1,5 +1,5 @@
 export type ICounter = {
-    id: number,
+    id: string,
     title: string,
     createdAt: number,
     resetType: string,
@@ -7,10 +7,10 @@ export type ICounter = {
     groupId?: number,
     color: string,
     incrementValue?: number,
-    latestRecord: IRecord,
 }
 
 export type IRecord = {
+  counterId: string,
   incrementValue: number,
   latestValue: number,
   createdAt: number,
