@@ -3,7 +3,6 @@
   import Button from "./../Button/Button.svelte";
 
   export let isVisible: boolean;
-  export let width = 96;
   export let confirmText = "Confirm";
   export let cancelText = "Cancel";
   export let onConfirm = () => {};
@@ -12,13 +11,13 @@
 
 <Portal target="body">
   <div
-    class="fixed inset-0 flex justify-center items-center"
+    class="fixed inset-0 flex justify-center items-center transition-opacity duration-300"
     class:opacity-0={!isVisible}
     class:pointer-events-none={!isVisible}
   >
     <div class="absolute bg-black opacity-50 h-full w-full" />
     <div
-      class={`absolute bg-neutral-800 rounded-lg w-full h-full md:w-${width} md:h-fit md:max-h-full flex flex-col`}
+      class={`absolute bg-neutral-800 rounded-lg h-full max-h-full sm:h-fit w-full sm:w-fit flex flex-col`}
     >
       <!-- Content -->
       <div class="p-6 h-full overflow-auto">
