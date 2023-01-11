@@ -12,15 +12,14 @@
 
   const buttonTextClasses = "font-bold text-sm text-center";
   
-  const buttonContainerClasses = `${
-    block ? "w-full" : ""
-  }  px-4 py-3 rounded-lg transition-colors`;
+  const buttonContainerClasses = `px-4 py-3 rounded-lg transition-colors`;
 
 </script>
 
 <button
   on:click
   class={`${buttonContainerClasses} ${buttonTextClasses} ${colorClasses[color]}`}
+  class:w-full={block}
 >
   {text}
 </button>
