@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { CounterTile, Modal, NewCounterTile } from "@/lib/components";
+  import {
+    CounterTile,
+    NewCounterTile,
+    AddCounterModal,
+  } from "@/lib/components";
   import { counters } from "./lib/store/counters";
 
   let isAddModalOpen = false;
@@ -22,11 +26,9 @@
     </div>
   </div>
 
-  <Modal
+  <AddCounterModal
     isVisible={isAddModalOpen}
     onCancel={() => (isAddModalOpen = false)}
     onConfirm={() => (isAddModalOpen = false)}
-  >
-    <p class="text-lg font-bold text-white">New Counter</p>
-  </Modal>
+  />
 </main>
