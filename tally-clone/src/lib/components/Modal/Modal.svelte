@@ -1,6 +1,6 @@
 <script lang="ts">
   import Portal from "svelte-portal";
-  import Button from "./../Button/Button.svelte";
+  import { Button } from "@/lib/components";
 
   export let isVisible: boolean;
   export let confirmText = "Confirm";

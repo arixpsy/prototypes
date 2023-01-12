@@ -1,4 +1,4 @@
-import type { ICounter } from "./types";
+import type { ICounter } from "@/utils/types";
 
 export const defaultCounterStoreValues: Array<ICounter> = [
   {

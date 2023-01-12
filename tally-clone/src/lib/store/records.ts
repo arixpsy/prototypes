@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import { defaultCounterStoreValues } from "../../utils/defaults";
-import type { IRecord } from "../../utils/types";
+import type { IRecord } from "@/utils/types";
 
 const storedRecords = JSON.parse(localStorage.getItem("records"));
 

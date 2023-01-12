@@ -1,6 +1,6 @@
 <script lang="ts">
   import { DateTime } from "luxon";
-  import type { ICounter, IRecord } from "../../../utils/types";
+  import type { ICounter, IRecord } from "@/utils/types";
 
   export let counter: ICounter;
 

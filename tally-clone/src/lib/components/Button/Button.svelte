@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { IButtonColor } from "./types";
+  import type { IButtonColor } from "@/lib/components/Button/types";
 
   export let text = "";
   export let color: IButtonColor = "default";
@@ -11,16 +11,12 @@
   };
 
   const buttonTextClasses = "font-bold text-sm text-center";
-  
+
   const buttonContainerClasses = `px-4 py-3 rounded-lg transition-colors`;
 
-  const buttonClasses = `${buttonContainerClasses} ${buttonTextClasses} ${colorClasses[color]}`
+  const buttonClasses = `${buttonContainerClasses} ${buttonTextClasses} ${colorClasses[color]}`;
 </script>
 
-<button
-  on:click
-  class={buttonClasses}
-  class:w-full={block}
->
+<button on:click class={buttonClasses} class:w-full={block}>
   {text}
 </button>

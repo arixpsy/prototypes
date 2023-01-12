@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import { defaultCounterStoreValues } from "../../utils/defaults";
-import type { ICounter } from "../../utils/types";
+import type { ICounter } from "@/utils/types";
 
 const storedCounters = JSON.parse(localStorage.getItem("counters"));
 
