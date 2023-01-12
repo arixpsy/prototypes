@@ -2,7 +2,7 @@
   import Portal from "svelte-portal";
   import { Button } from "@/lib/components";
 
-  export let isVisible: boolean;
+  export let isVisible = false;
   export let confirmText = "Confirm";
   export let cancelText = "Cancel";
   export let onConfirm = () => {};
