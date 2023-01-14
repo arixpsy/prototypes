@@ -14,7 +14,7 @@
   $: currentCount = latestRecord.latestValue;
   $: counterTypeLabel = (() => {
     switch (counter.resetType) {
-      case "day":
+      case "Day":
         return "Today";
       default:
         return `This ${counter.resetType}`;
