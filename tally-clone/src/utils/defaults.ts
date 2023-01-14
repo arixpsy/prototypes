@@ -2,7 +2,7 @@ import type { ICounter } from "@/utils/types";
 
 export const defaultCounterStoreValues: Array<ICounter> = [
   {
-    id: 'test1',
+    id: "test1",
     title: "Commits",
     createdAt: 1673370178,
     resetType: "Day",
@@ -11,7 +11,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     incrementValue: undefined,
   },
   {
-    id: 'test2',
+    id: "test2",
     title: "Commits",
     createdAt: 1673370178,
     resetType: "Week",
@@ -20,7 +20,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     incrementValue: undefined,
   },
   {
-    id: 'test3',
+    id: "test3",
     title: "Commits",
     createdAt: 1673370178,
     resetType: "Month",
@@ -29,7 +29,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     incrementValue: undefined,
   },
   {
-    id: 'test4',
+    id: "test4",
     title: "Commits",
     createdAt: 1673370178,
     resetType: "Year",
@@ -38,7 +38,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     incrementValue: undefined,
   },
   {
-    id: 'test5',
+    id: "test5",
     title: "Commits",
     createdAt: 1673370178,
     resetType: "Never",
