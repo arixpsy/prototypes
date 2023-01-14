@@ -7,6 +7,10 @@
   import { counters } from "./lib/store/counters";
 
   let isAddModalOpen = false;
+
+  function toggleAddModalOpen() {
+    isAddModalOpen = !isAddModalOpen;
+  }
 </script>
 
 <main class="min-h-screen bg-neutral-800">
@@ -28,7 +32,8 @@
 
   <AddCounterModal
     isVisible={isAddModalOpen}
-    onCancel={() => (isAddModalOpen = false)}
-    onConfirm={() => (isAddModalOpen = false)}
+    on:modal-submit={toggleAddModalOpen}
+    on:modal-close={toggleAddModalOpen}
+    on:modal-cancel={toggleAddModalOpen}
   />
 </main>
