@@ -7,7 +7,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     createdAt: 1673370178,
     resetType: "Day",
     target: null,
-    color: "bg-slate-400",
+    color: "bg-slate-500",
     incrementValue: undefined,
   },
   {
@@ -16,7 +16,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     createdAt: 1673370178,
     resetType: "Week",
     target: null,
-    color: "bg-lime-400",
+    color: "bg-green-500",
     incrementValue: undefined,
   },
   {
@@ -25,7 +25,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     createdAt: 1673370178,
     resetType: "Month",
     target: null,
-    color: "bg-blue-400",
+    color: "bg-blue-500",
     incrementValue: undefined,
   },
   {
@@ -34,7 +34,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     createdAt: 1673370178,
     resetType: "Year",
     target: null,
-    color: "bg-yellow-400",
+    color: "bg-yellow-500",
     incrementValue: undefined,
   },
   {
@@ -43,7 +43,7 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     createdAt: 1673370178,
     resetType: "Never",
     target: null,
-    color: "bg-yellow-400",
+    color: "bg-yellow-500",
     incrementValue: undefined,
   },
 ];

@@ -1,5 +1,5 @@
 <div
-  class="aspect-square flex flex-col justify-center items-center rounded-lg border-dashed border-gray-500 border-8 text-gray-500 cursor-pointer"
+  class="aspect-square flex flex-col justify-center items-center rounded-lg border-dashed border-gray-300 border-8 text-gray-300 cursor-pointer"
   on:click
   on:keyup
 >

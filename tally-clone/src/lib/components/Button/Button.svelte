@@ -6,8 +6,8 @@
   export let block = false;
 
   const colorClasses: Record<IButtonColor, string> = {
-    default: "text-gray-400 bg-gray-100 hover:bg-gray-200 hover:text-black",
-    primary: "text-pink-100 bg-blue-600 hover:bg-blue-700 hover:text-white",
+    default: "text-gray-400 bg-gray-200 hover:bg-gray-300 hover:text-black",
+    primary: "text-blue-100 bg-blue-600 hover:bg-blue-700 hover:text-white",
   };
 
   const buttonTextClasses = "font-bold text-sm text-center";
