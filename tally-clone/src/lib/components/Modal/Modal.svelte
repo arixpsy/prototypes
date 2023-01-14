@@ -1,30 +1,30 @@
 <script lang="ts">
   import Portal from "svelte-portal";
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from "svelte";
   import { Button } from "@/lib/components";
 
   export let isVisible = false;
   export let confirmText = "Confirm";
   export let cancelText = "Cancel";
 
-	const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<any>();
 
-  function handleKeypress (e: KeyboardEvent) {
-    if (e.keyCode === 27) handleClose()
+  function handleKeypress(e: KeyboardEvent) {
+    if (e.keyCode === 27) handleClose();
   }
 
   function handleOnConfirm() {
-    dispatch('modal-submit')
+    dispatch("modal-confirm");
   }
 
   function handleClose() {
-    dispatch('modal-close')
+    dispatch("modal-close");
   }
 
   function handleCancel() {
-    dispatch('modal-cancel')
+    dispatch("modal-cancel");
   }
- </script>
+</script>
 
 <Portal target="body">
   <div
@@ -49,7 +49,12 @@
       <!-- Footer -->
       <div class="p-6 flex space-x-6 h-24">
         <Button text={cancelText} on:click={handleCancel} block />
-        <Button text={confirmText} color="primary" on:click={handleOnConfirm} block />
+        <Button
+          text={confirmText}
+          color="primary"
+          on:click={handleOnConfirm}
+          block
+        />
       </div>
     </div>
   </div>
