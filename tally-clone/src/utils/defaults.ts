@@ -1,4 +1,4 @@
-import type { ICounter } from "@/utils/types";
+import type { ICounter, IRecord } from "@/utils/types";
 
 export const defaultCounterStoreValues: Array<ICounter> = [
   {
@@ -47,3 +47,5 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     incrementValue: undefined,
   },
 ];
+
+export const defaultRecordStoreValues: Array<IRecord> = [];

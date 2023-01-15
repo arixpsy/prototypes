@@ -8,4 +8,6 @@ export const counters = writable<Array<ICounter>>(
   storedCounters || defaultCounterStoreValues
 );
 
-counters.subscribe((value) => localStorage.setItem('counters', JSON.stringify(value)))
+counters.subscribe((value) =>
+  localStorage.setItem("counters", JSON.stringify(value))
+);

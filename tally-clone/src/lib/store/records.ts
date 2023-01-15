@@ -1,11 +1,13 @@
 import { writable } from "svelte/store";
-import { defaultCounterStoreValues } from "../../utils/defaults";
+import { defaultRecordStoreValues } from "../../utils/defaults";
 import type { IRecord } from "@/utils/types";
 
 const storedRecords = JSON.parse(localStorage.getItem("records"));
 
 export const records = writable<Array<IRecord>>(
-  storedRecords || defaultCounterStoreValues
+  storedRecords || defaultRecordStoreValues
 );
 
-records.subscribe((value) => localStorage.setItem('records', JSON.stringify(value)))
+records.subscribe((value) =>
+  localStorage.setItem("records", JSON.stringify(value))
+);
