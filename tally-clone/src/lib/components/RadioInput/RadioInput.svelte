@@ -43,17 +43,17 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<label tabindex="0" class={inputClassesCombined} on:keyup={handleKeyUp} >
+<label tabindex="0" class={inputClassesCombined} on:keyup={handleKeyUp}>
   <input type="radio" bind:group {value} {...InputProps} class="hidden" />
   {value}</label
 >
 
 <style>
-.onSelected {
+  .onSelected {
     animation: scale 300ms ease-out;
-}
+  }
 
-label {
-  -webkit-tap-highlight-color: transparent;
-}
+  label {
+    -webkit-tap-highlight-color: transparent;
+  }
 </style>
