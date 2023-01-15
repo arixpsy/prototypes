@@ -5,30 +5,9 @@
   export let group: string = "";
 
   $: ({ ...InputProps } = $$props);
-  $: inputState = value === group ? "selected" : "default";
-  $: inputClassesCombined = Object.values(
-    inputClasses[inputState || "default"]
-  ).join(" ");
+  $: isSelected = value === group;
 
-  const dispatch = createEventDispatcher<{
-    "radio-submit": string;
-    "radio-select": string;
-  }>();
-
-  const inputClasses = {
-    default: {
-      text: "text-sm",
-      container:
-        "px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer",
-      color: "bg-gray-200 text-gray-400 focus:bg-gray-300 hover:bg-gray-300",
-    },
-    selected: {
-      text: "text-sm font-bold",
-      container:
-        "px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer onSelected",
-      color: "bg-blue-700 text-white",
-    },
-  };
+  const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
@@ -43,7 +22,18 @@
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-<label tabindex="0" class={inputClassesCombined} on:keyup={handleKeyUp}>
+<label
+  tabindex="0"
+  class="text-sm px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer"
+  class:focus:bg-gray-300={!isSelected}
+  class:hover:bg-gray-300={!isSelected}
+  class:bg-gray-200={!isSelected}
+  class:text-gray-400={!isSelected}
+  class:bg-blue-700={isSelected}
+  class:text-white={isSelected}
+  class:onSelected={isSelected}
+  on:keyup={handleKeyUp}
+>
   <input type="radio" bind:group {value} {...InputProps} class="hidden" />
   {value}</label
 >

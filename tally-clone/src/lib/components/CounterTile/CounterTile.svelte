@@ -28,7 +28,9 @@
 <div
   class={`aspect-square flex flex-col justify-center items-center rounded-lg p-3 ${counter.color}`}
 >
-  <p class="text-lg text-gray-100 text-center truncate w-full">{counter.title}</p>
+  <p class="text-lg text-gray-100 text-center truncate w-full">
+    {counter.title}
+  </p>
   <p class="text-xs text-center w-full">{counterTypeLabel}</p>
   <p class="text-4xl text-center font-bold my-2 w-full">{currentCount}</p>
   <p class="text-xs text-center w-full">{LastRecordLabel}</p>

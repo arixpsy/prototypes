@@ -6,7 +6,6 @@
   export let isVisible = false;
   export let confirmText = "Confirm";
   export let cancelText = "Cancel";
-
   const dispatch = createEventDispatcher<any>();
 
   function handleKeyUp(e: KeyboardEvent) {
