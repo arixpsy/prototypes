@@ -20,13 +20,13 @@
       text: "text-sm",
       container:
         "px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer",
-      color: "bg-gray-50 text-gray-400 focus:bg-gray-200 hover:bg-gray-200",
+      color: "bg-gray-200 text-gray-400 focus:bg-gray-300 hover:bg-gray-300",
     },
     selected: {
-      text: "text-sm fold-bold",
+      text: "text-sm font-bold",
       container:
         "px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer onSelected",
-      color: "bg-gray-300 text-gray-700",
+      color: "bg-blue-700 text-white",
     },
   };
 
