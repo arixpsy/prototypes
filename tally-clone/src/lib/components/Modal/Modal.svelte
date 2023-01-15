@@ -39,7 +39,7 @@
       on:keypress={() => {}}
     />
     <div
-      class={`absolute bg-white rounded-lg h-full max-h-full sm:h-fit w-full sm:w-fit flex flex-col`}
+      class={`absolute flex flex-col bg-white h-full max-h-full sm:h-fit w-full sm:w-fit sm:rounded-lg`}
     >
       <!-- Content -->
       <div class="p-6 h-full overflow-auto">
