@@ -9,7 +9,7 @@
 
   const dispatch = createEventDispatcher<any>();
 
-  function handleKeypress(e: KeyboardEvent) {
+  function handleKeyUp(e: KeyboardEvent) {
     if (e.keyCode === 27) handleClose();
   }
 
@@ -31,7 +31,7 @@
     class="fixed inset-0 flex justify-center items-center transition-opacity duration-300"
     class:opacity-0={!isVisible}
     class:pointer-events-none={!isVisible}
-    on:keyup={handleKeypress}
+    on:keyup={handleKeyUp}
   >
     <div
       class="absolute bg-black opacity-50 h-full w-full"
