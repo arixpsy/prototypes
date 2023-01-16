@@ -97,7 +97,7 @@
           class:event
         >
           <p class="text-sm text-gray-500 flex-none">Target:</p>
-          <NumberInput bind:value={target} class='flex-1'/>
+          <NumberInput bind:value={target} class="flex-1" />
         </div>
       </div>
     </div>

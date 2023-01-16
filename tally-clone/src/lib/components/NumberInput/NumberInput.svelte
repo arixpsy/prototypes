@@ -1,9 +1,9 @@
 <script lang="ts">
   export let value: number;
   export let ref: HTMLInputElement = undefined;
-	export { forwardClasses as class };
+  export { forwardClasses as class };
 
-  $: ({   ...InputProps } = $$props);
+  $: ({ ...InputProps } = $$props);
 
   let forwardClasses: string;
   const inputTextClasses = "text-sm";
