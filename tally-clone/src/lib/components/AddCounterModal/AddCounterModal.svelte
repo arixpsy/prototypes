@@ -57,12 +57,12 @@
 >
   <p class="text-3xl mb-3">NEW</p>
 
-  <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col">
-    <div class="flex flex-col my-3">
+  <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col space-y-6">
+    <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">What are you counting?</p>
       <TextInput bind:value={title} bind:ref={titleRef} />
     </div>
-    <div class="flex flex-col my-3">
+    <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Resets every:</p>
       <div class="flex gap-3 flex-wrap">
         {#each resetTypeValues as [resetKey, resetType] (resetKey)}
@@ -76,7 +76,7 @@
         {/each}
       </div>
     </div>
-    <div class="flex flex-col my-3">
+    <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Set a target?</p>
       <div class="flex flex-wrap items-center gap-3">
         <SwitchInput
