@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { Modal, TextInput, RadioInput } from "@/lib/components/";
+  import { Modal, TextInput, RadioInput, NumberInput } from "@/lib/components/";
   import { RESET_TYPE, type IResetType } from "@/utils/types";
   import SwitchInput from "@/lib/components/SwitchInput/SwitchInput.svelte";
 
@@ -22,6 +22,8 @@
   function handleResetForm() {
     title = "";
     type = "Day";
+    hasTarget = false;
+    target = 0;
   }
 
   function handleFormSubmit() {
@@ -57,7 +59,10 @@
 >
   <p class="text-3xl mb-3">NEW</p>
 
-  <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col space-y-6">
+  <form
+    on:submit|preventDefault={handleFormSubmit}
+    class="flex flex-col space-y-6"
+  >
     <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">What are you counting?</p>
       <TextInput bind:value={title} bind:ref={titleRef} />
@@ -84,11 +89,15 @@
           on:switch-toggle={() => (hasTarget = !hasTarget)}
           on:switch-submit={handleFormSubmit}
         />
+
         <div
-          class="flex items-center gap-3 transition-opacity"
+          class="flex items-center flex-wrap flex-1 gap-3 transition-opacity"
           class:opacity-0={!hasTarget}
+          class:pointer-events-none={!hasTarget}
+          class:event
         >
-          <p class="text-sm text-gray-500">Target:</p>
+          <p class="text-sm text-gray-500 flex-none">Target:</p>
+          <NumberInput bind:value={target} class='flex-1'/>
         </div>
       </div>
     </div>
