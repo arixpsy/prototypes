@@ -4,17 +4,13 @@
   export let isToggle: boolean;
   const dispatch = createEventDispatcher();
 
-  function handleSwitchPress() {
-    dispatch("switch-toggle");
-  }
-
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
       case 13:
         dispatch("switch-submit");
         return;
       case 32:
-        handleSwitchPress();
+        isToggle = !isToggle;
         return;
     }
   }
@@ -26,7 +22,7 @@
   class="relative h-9 w-16 p-1 rounded-full transition-colors cursor-pointer select-none"
   class:bg-gray-200={!isToggle}
   class:bg-blue-700={isToggle}
-  on:click={handleSwitchPress}
+  on:click={() => (isToggle = !isToggle)}
   on:keyup={handleKeyUp}
 >
   <div
