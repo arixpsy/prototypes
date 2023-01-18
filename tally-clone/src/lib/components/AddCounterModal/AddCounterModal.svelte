@@ -7,6 +7,7 @@
     NumberInput,
     SwitchInput,
     ColorRadioInput,
+    IncrementInput,
   } from "@/lib/components/";
   import { COUNTER_COLOR, RESET_TYPE, type IResetType } from "@/utils/types";
 
@@ -16,7 +17,8 @@
   let hasTarget: boolean = false;
   let target: number = 0;
   let color: string = COUNTER_COLOR[0];
-  let increment: number;
+  let hasCustomIncrement: boolean = false;
+  let increment: number = 1;
   const dispatch = createEventDispatcher();
 
   $: ({ isVisible, ...ModalProps } = $$props);
@@ -30,6 +32,9 @@
     type = "Day";
     hasTarget = false;
     target = 0;
+    color = COUNTER_COLOR[0];
+    hasCustomIncrement = false;
+    increment = 1;
   }
 
   function handleFormSubmit() {
@@ -38,19 +43,20 @@
     console.log(hasTarget);
     console.log(target);
     console.log(color);
+    console.log(increment);
 
     handleResetForm();
     dispatch("modal-close");
   }
 
   function handleFormCancel() {
-    handleResetForm();
     dispatch("modal-cancel");
+    handleResetForm();
   }
 
   function handleFormClose() {
-    handleResetForm();
     dispatch("modal-close");
+    handleResetForm();
   }
 
   function handleRadioSelect(event: CustomEvent<IResetType>) {
@@ -79,6 +85,7 @@
       <p class="text-sm text-gray-500 mb-3">What are you counting?</p>
       <TextInput bind:value={title} bind:ref={titleRef} />
     </div>
+
     <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Resets every:</p>
       <div class="flex gap-3 flex-wrap">
@@ -94,11 +101,18 @@
       </div>
     </div>
     <div class="flex flex-col">
+      <p class="text-sm text-gray-500 mb-3">Counter Increment:</p>
+      <IncrementInput
+        bind:value={increment}
+        bind:isCustom={hasCustomIncrement}
+      />
+    </div>
+
+    <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Set a target?</p>
       <div class="flex flex-wrap items-center gap-3">
         <SwitchInput
-          isToggle={hasTarget}
-          on:switch-toggle={() => (hasTarget = !hasTarget)}
+          bind:isToggle={hasTarget}
           on:switch-submit={handleFormSubmit}
         />
 
@@ -106,7 +120,6 @@
           class="flex items-center flex-wrap flex-1 gap-3 transition-opacity"
           class:opacity-0={!hasTarget}
           class:pointer-events-none={!hasTarget}
-          class:event
         >
           <p class="text-sm text-gray-500 flex-none">Target:</p>
           <NumberInput
@@ -117,6 +130,7 @@
         </div>
       </div>
     </div>
+
     <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Pick a color:</p>
       <div class="flex flex-wrap gap-3 max-w-xl">
@@ -130,7 +144,7 @@
         {/each}
       </div>
     </div>
-    <!-- <input placeholder="Increment" type="number" /> -->
+
     <input type="submit" class="invisible h-0" />
   </form>
 </Modal>
