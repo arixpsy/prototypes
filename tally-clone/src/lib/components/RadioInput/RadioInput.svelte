@@ -24,7 +24,7 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <label
   tabindex="0"
-  class="text-sm px-3 py-1.5 rounded-full transition-colors cursor-pointer"
+  class="text-sm px-3 py-1.5 rounded-full transition-colors select-none touch-none cursor-pointer"
   class:focus:bg-gray-300={!isSelected}
   class:hover:bg-gray-300={!isSelected}
   class:bg-gray-200={!isSelected}
