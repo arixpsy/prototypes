@@ -1,15 +1,21 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { Modal, TextInput, RadioInput, NumberInput } from "@/lib/components/";
-  import { RESET_TYPE, type IResetType } from "@/utils/types";
-  import SwitchInput from "@/lib/components/SwitchInput/SwitchInput.svelte";
+  import {
+    Modal,
+    TextInput,
+    RadioInput,
+    NumberInput,
+    SwitchInput,
+    ColorRadioInput,
+  } from "@/lib/components/";
+  import { COUNTER_COLOR, RESET_TYPE, type IResetType } from "@/utils/types";
 
   let title = "";
   let titleRef: HTMLInputElement;
-  let type: IResetType = "Day";
+  let type: IResetType = RESET_TYPE.DAY;
   let hasTarget: boolean = false;
   let target: number = 0;
-  let color: string;
+  let color: string = COUNTER_COLOR[0];
   let increment: number;
   const dispatch = createEventDispatcher();
 
@@ -30,6 +36,8 @@
     console.log(title);
     console.log(type);
     console.log(hasTarget);
+    console.log(target);
+    console.log(color);
 
     handleResetForm();
     dispatch("modal-close");
@@ -47,6 +55,10 @@
 
   function handleRadioSelect(event: CustomEvent<IResetType>) {
     type = event.detail;
+  }
+
+  function handleColorRadioSelect(event: CustomEvent<IResetType>) {
+    color = event.detail;
   }
 </script>
 
@@ -97,12 +109,28 @@
           class:event
         >
           <p class="text-sm text-gray-500 flex-none">Target:</p>
-          <NumberInput bind:value={target} class="flex-1" />
+          <NumberInput
+            bind:value={target}
+            class="flex-1"
+            tabIndex={hasTarget ? 0 : -1}
+          />
         </div>
       </div>
     </div>
-    <!-- <input placeholder="Color" type="color" />
-    <input placeholder="Increment" type="number" /> -->
+    <div class="flex flex-col">
+      <p class="text-sm text-gray-500 mb-3">Pick a color:</p>
+      <div class="flex flex-wrap gap-3 max-w-xl">
+        {#each COUNTER_COLOR as counterColor, i (i)}
+          <ColorRadioInput
+            bind:group={color}
+            value={counterColor}
+            on:radio-select={handleColorRadioSelect}
+            on:radio-submit={handleFormSubmit}
+          />
+        {/each}
+      </div>
+    </div>
+    <!-- <input placeholder="Increment" type="number" /> -->
     <input type="submit" class="invisible h-0" />
   </form>
 </Modal>
