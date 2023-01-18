@@ -23,7 +23,7 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   tabindex="0"
-  class="relative h-9 w-16 p-1 rounded-full outline-none transition-colors cursor-pointer select-none"
+  class="relative h-9 w-16 p-1 rounded-full transition-colors cursor-pointer select-none"
   class:bg-gray-200={!isToggle}
   class:bg-blue-700={isToggle}
   on:click={handleSwitchPress}

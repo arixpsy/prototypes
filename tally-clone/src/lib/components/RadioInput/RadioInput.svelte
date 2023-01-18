@@ -24,7 +24,7 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <label
   tabindex="0"
-  class="text-sm px-3 py-1.5 rounded-full outline-none transition-colors cursor-pointer"
+  class="text-sm px-3 py-1.5 rounded-full transition-colors cursor-pointer"
   class:focus:bg-gray-300={!isSelected}
   class:hover:bg-gray-300={!isSelected}
   class:bg-gray-200={!isSelected}
@@ -39,6 +39,18 @@
 >
 
 <style>
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   .onSelected {
     animation: scale 300ms ease-out;
   }
