@@ -1,5 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { nanoid } from "nanoid";
+  import { DateTime } from "luxon";
   import {
     Modal,
     TextInput,
@@ -9,7 +11,14 @@
     ColorRadioInput,
     IncrementInput,
   } from "@/lib/components/";
-  import { COUNTER_COLOR, RESET_TYPE, type IResetType } from "@/utils/types";
+  import { counters } from "@/lib/store/counters";
+  import {
+    CounterSchema,
+    COUNTER_COLOR,
+    RESET_TYPE,
+    type ICounter,
+    type IResetType,
+  } from "@/utils/types";
 
   let title = "";
   let titleRef: HTMLInputElement;
@@ -38,15 +47,24 @@
   }
 
   function handleFormSubmit() {
-    console.log(title);
-    console.log(type);
-    console.log(hasTarget);
-    console.log(target);
-    console.log(color);
-    console.log(increment);
+    try {
+      const newCounter = CounterSchema.parse({
+        id: nanoid(),
+        title,
+        resetType: type,
+        incrementValue: increment,
+        target,
+        color,
+        createdAt: DateTime.now().toSeconds(),
+      });
 
-    handleResetForm();
-    dispatch("modal-close");
+      $counters = [...$counters, newCounter];
+      handleResetForm();
+      dispatch("modal-close");
+    } catch (error) {
+      // TODO: handle error notifs
+      console.table(error);
+    }
   }
 
   function handleFormCancel() {
