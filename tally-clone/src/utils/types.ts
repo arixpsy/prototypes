@@ -50,7 +50,7 @@ export type ICounterColor = typeof COUNTER_COLOR[number];
 
 export const CounterSchema = z.object({
   id: z.string(),
-  title: z.string().max(20),
+  title: z.string().min(1).max(15),
   createdAt: z.number(),
   resetType: z.nativeEnum(RESET_TYPE),
   target: z.number().min(0),
