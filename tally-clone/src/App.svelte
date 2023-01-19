@@ -4,7 +4,7 @@
     NewCounterTile,
     AddCounterModal,
   } from "@/lib/components";
-  import { counters } from "./lib/store/counters";
+  import { counters } from "@/lib/store/counters";
 
   let isAddModalOpen = false;
 
