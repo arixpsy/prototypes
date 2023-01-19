@@ -26,12 +26,17 @@
 </script>
 
 <div
-  class={`aspect-square flex flex-col justify-center items-center rounded-lg p-3 ${counter.color}`}
+  class={`aspect-square flex flex-col justify-center items-center rounded-lg p-2 ${counter.color}`}
 >
-  <p class="text-lg text-gray-100 text-center truncate w-full">
+  <p class="text-md text-gray-100 text-center truncate w-full">
     {counter.title}
   </p>
   <p class="text-xs text-center w-full">{counterTypeLabel}</p>
-  <p class="text-4xl text-center font-bold my-2 w-full">{currentCount}</p>
+  <p class="text-3xl text-center font-bold my-3 w-full">
+    {currentCount}
+    {#if counter.target}
+      /{counter.target}
+    {/if}
+  </p>
   <p class="text-xs text-center w-full">{LastRecordLabel}</p>
 </div>
