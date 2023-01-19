@@ -1,50 +1,15 @@
-import type { ICounter, IRecord } from "@/utils/types";
+import { COUNTER_COLOR, type ICounter, type IRecord } from "@/utils/types";
+import { DateTime } from "luxon";
 
 export const defaultCounterStoreValues: Array<ICounter> = [
   {
-    id: "test1",
-    title: "Commits",
-    createdAt: 1673370178,
+    id: "exampleCounter",
+    title: "Vitamins",
+    createdAt: DateTime.now().toSeconds(),
     resetType: "Day",
     target: null,
-    color: "bg-slate-500",
-    incrementValue: undefined,
-  },
-  {
-    id: "test2",
-    title: "Commits",
-    createdAt: 1673370178,
-    resetType: "Week",
-    target: null,
-    color: "bg-green-500",
-    incrementValue: undefined,
-  },
-  {
-    id: "test3",
-    title: "Commits",
-    createdAt: 1673370178,
-    resetType: "Month",
-    target: null,
-    color: "bg-blue-500",
-    incrementValue: undefined,
-  },
-  {
-    id: "test4",
-    title: "Commits",
-    createdAt: 1673370178,
-    resetType: "Year",
-    target: null,
-    color: "bg-yellow-500",
-    incrementValue: undefined,
-  },
-  {
-    id: "test5",
-    title: "Commits",
-    createdAt: 1673370178,
-    resetType: "Never",
-    target: null,
-    color: "bg-yellow-500",
-    incrementValue: undefined,
+    color: COUNTER_COLOR[0],
+    incrementValue: 1,
   },
 ];
 
