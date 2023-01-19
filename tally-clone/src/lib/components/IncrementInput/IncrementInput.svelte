@@ -16,7 +16,6 @@
   const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
-    // TODO: handle for different target
     switch (e.keyCode) {
       case 13:
         dispatch("switch-submit");
@@ -69,7 +68,7 @@
 
   {#if !isCustom}
     <div
-      transition:slide={{ duration: 1000 }}
+      transition:slide={{ duration: 500 }}
       class="flex justify-center items-center gap-6 mt-6"
     >
       <button
