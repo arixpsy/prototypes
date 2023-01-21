@@ -1,5 +1,6 @@
 <script lang="ts">
   import { DateTime } from "luxon";
+  import { scale } from "svelte/transition";
   import type { ICounter, IRecord } from "@/utils/types";
 
   export let counter: ICounter;
@@ -27,6 +28,7 @@
 
 <div
   class={`aspect-square flex flex-col justify-center items-center rounded-lg p-2 ${counter.color}`}
+  transition:scale
 >
   <p class="text-md text-gray-100 text-center truncate w-full">
     {counter.title}
