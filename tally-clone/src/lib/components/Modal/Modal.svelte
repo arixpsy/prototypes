@@ -30,7 +30,7 @@
 
 <Portal target="body">
   <div
-    class="fixed inset-0 flex justify-center items-center transition-opacity duration-300"
+    class="fixed inset-0 flex justify-center items-center transition-opacity duration-300 z-20"
     class:opacity-0={!isVisible}
     class:pointer-events-none={!isVisible}
     on:keyup={handleKeyUp}
