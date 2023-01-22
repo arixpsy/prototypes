@@ -3,7 +3,7 @@
   import { nanoid } from "nanoid";
   import { scale } from "svelte/transition";
   import { records } from "@/lib/store/records";
-  import type { ICounter, IRecord } from "@/utils/types";
+  import { KEY_EVENT, type ICounter, type IRecord } from "@/utils/types";
   import { derived } from "svelte/store";
   import {
     getCounterTypeLabel,
@@ -21,7 +21,7 @@
 
   function handleKeyPress(e: KeyboardEvent) {
     switch (e.keyCode) {
-      case 32:
+      case KEY_EVENT.SPACE:
         handleClickCounter();
         return;
     }

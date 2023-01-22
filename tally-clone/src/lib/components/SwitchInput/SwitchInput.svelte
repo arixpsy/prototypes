@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
 
   export let isToggle: boolean;
@@ -6,10 +7,10 @@
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
-      case 13:
+      case KEY_EVENT.ENTER:
         dispatch("switch-submit");
         return;
-      case 32:
+      case KEY_EVENT.SPACE:
         isToggle = !isToggle;
         return;
     }

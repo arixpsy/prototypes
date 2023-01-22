@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
   import { slide, fade } from "svelte/transition";
 
@@ -17,10 +18,10 @@
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
-      case 13:
+      case KEY_EVENT.ENTER:
         dispatch("switch-submit");
         return;
-      case 32:
+      case KEY_EVENT.SPACE:
         isCustom = !isCustom;
         return;
     }

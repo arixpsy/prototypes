@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
 
   export let value: string = "";
@@ -11,10 +12,10 @@
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
-      case 13:
+      case KEY_EVENT.SPACE:
         dispatch("radio-submit", value);
         return;
-      case 32:
+      case KEY_EVENT.SPACE:
         dispatch("radio-select", value);
         return;
     }

@@ -2,6 +2,7 @@
   import Portal from "svelte-portal";
   import { createEventDispatcher } from "svelte";
   import { Button } from "@/lib/components";
+  import { KEY_EVENT } from "@/utils/types";
 
   export let isVisible = false;
   export let confirmText = "Confirm";
@@ -9,7 +10,7 @@
   const dispatch = createEventDispatcher<any>();
 
   function handleKeyUp(e: KeyboardEvent) {
-    if (e.keyCode === 27) handleClose();
+    if (e.keyCode === KEY_EVENT.ESC) handleClose();
   }
 
   function handleOnConfirm() {
@@ -17,12 +18,14 @@
   }
 
   function handleClose() {
-    dispatch("modal-close");
+    if (isVisible) dispatch("modal-close");
   }
 
   function handleCancel() {
     dispatch("modal-cancel");
   }
+
+  // TODO: handle conditional rendering to prevent focusable
 </script>
 
 <Portal target="body">
