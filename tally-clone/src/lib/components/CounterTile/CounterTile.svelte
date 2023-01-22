@@ -70,3 +70,9 @@
     </p>
   {/key}
 </div>
+
+<style>
+  div {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
