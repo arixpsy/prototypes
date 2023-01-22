@@ -1,6 +1,6 @@
 <script lang="ts">
   export let value: number;
-  export let ref: HTMLInputElement = undefined;
+  export let ref: HTMLInputElement;
   export { forwardClasses as class };
 
   $: ({ ...InputProps } = $$props);
