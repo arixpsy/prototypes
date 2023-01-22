@@ -101,7 +101,11 @@
   >
     <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">What are you counting?</p>
-      <TextInput bind:value={title} bind:ref={titleRef} />
+      <TextInput
+        bind:value={title}
+        bind:ref={titleRef}
+        on:input-submit={handleFormSubmit}
+      />
     </div>
 
     <div class="flex flex-col">
@@ -123,6 +127,7 @@
       <IncrementInput
         bind:value={increment}
         bind:isCustom={hasCustomIncrement}
+        on:switch-submit={handleFormSubmit}
       />
     </div>
 
@@ -144,6 +149,7 @@
             bind:value={target}
             class="flex-1"
             tabIndex={hasTarget ? 0 : -1}
+            on:input-submit={handleFormSubmit}
           />
         </div>
       </div>
