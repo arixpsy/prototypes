@@ -7,9 +7,9 @@ export const KEY_EVENT = {
   ESC: 27,
   SPACE: 32,
   N_KEY: 78,
-} as const
+} as const;
 
-export type IKeyEvent = ObjectValues<typeof KEY_EVENT>
+export type IKeyEvent = ObjectValues<typeof KEY_EVENT>;
 
 export const RESET_TYPE = {
   DAY: "Day",
@@ -75,6 +75,8 @@ export const RecordSchema = z.object({
   incrementValue: z.number(),
   latestValue: z.number(),
   createdAt: z.number(),
+  labels: z.array(z.string()),
+  description: z.string(),
 });
 
 export type IRecord = z.infer<typeof RecordSchema>;

@@ -42,6 +42,8 @@
       incrementValue,
       latestValue: currentCount + incrementValue,
       createdAt: DateTime.now().toSeconds(),
+      labels: [],
+      description: "",
     };
 
     $records = [newRecord, ...$records];
