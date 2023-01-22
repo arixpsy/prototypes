@@ -12,7 +12,7 @@
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {
-      case KEY_EVENT.SPACE:
+      case KEY_EVENT.ENTER:
         dispatch("radio-submit", value);
         return;
       case KEY_EVENT.SPACE:
