@@ -80,3 +80,10 @@ export const RecordSchema = z.object({
 });
 
 export type IRecord = z.infer<typeof RecordSchema>;
+
+export type CustomIncrementEvent = {
+  counterId: string;
+  counterColor: ICounterColor;
+  counterTitle: string;
+  latestValue: number;
+};
