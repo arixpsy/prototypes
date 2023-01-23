@@ -4,7 +4,12 @@
   import { nanoid } from "nanoid";
   import { scale } from "svelte/transition";
   import { records } from "@/lib/store/records";
-  import { KEY_EVENT, type ICounter, type IRecord } from "@/utils/types";
+  import {
+    KEY_EVENT,
+    type CustomIncrementEvent,
+    type ICounter,
+    type IRecord,
+  } from "@/utils/types";
   import { derived } from "svelte/store";
   import {
     getCounterTypeLabel,
@@ -16,7 +21,9 @@
   $: currentCount = getCurrentCount(counter, $latestRecord);
   $: counterTypeLabel = getCounterTypeLabel(counter);
 
-  const dispatch = createEventDispatcher<{ "custom-increment": string }>();
+  const dispatch = createEventDispatcher<{
+    "custom-increment": CustomIncrementEvent;
+  }>();
   const latestRecord = derived(records, ($records) =>
     $records.find((record) => record.counterId == counter.id)
   );
@@ -31,7 +38,12 @@
 
   function handleClickCounter() {
     if (counter.incrementValue === 0) {
-      dispatch("custom-increment", counter.id);
+      dispatch("custom-increment", {
+        counterId: counter.id,
+        counterTitle: counter.title,
+        counterColor: counter.color,
+        latestValue: currentCount,
+      });
       return;
     }
     handleCounterIncrement(counter.incrementValue);
@@ -54,7 +66,7 @@
 
 <div
   tabIndex="0"
-  class={`aspect-square flex flex-col justify-center items-center rounded-lg p-2 ${counter.color} select-none cursor-pointer`}
+  class="aspect-square flex flex-col justify-center items-center rounded-lg p-2 {counter.color} select-none cursor-pointer"
   transition:scale
   on:click={handleClickCounter}
   on:contextmenu|preventDefault={handleClickCounter}
