@@ -9,6 +9,8 @@ import SwitchInput from "@/lib/components/SwitchInput/SwitchInput.svelte";
 import NumberInput from "@/lib/components/NumberInput/NumberInput.svelte";
 import ColorRadioInput from "@/lib/components/ColorRadioInput/ColorRadioInput.svelte";
 import IncrementInput from "@/lib/components/IncrementInput/IncrementInput.svelte";
+import IncrementPreviewTile from "@/lib/components/IncrementPreviewTile/IncrementPreviewTile.svelte";
+import CustomIncrementModal from "@/lib/components/CustomIncrementModal/CustomIncrementModal.svelte";
 
 export {
   AddCounterModal,
@@ -22,4 +24,6 @@ export {
   NumberInput,
   ColorRadioInput,
   IncrementInput,
+  IncrementPreviewTile,
+  CustomIncrementModal,
 };
