@@ -60,8 +60,8 @@
       });
 
       $counters = [...$counters, newCounter];
-      handleResetForm();
       dispatch("modal-close");
+      handleResetForm();
     } catch (error) {
       // TODO: handle error notifs
       console.table(error);
