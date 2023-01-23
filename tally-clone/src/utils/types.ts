@@ -72,7 +72,7 @@ export type ICounter = z.infer<typeof CounterSchema>;
 export const RecordSchema = z.object({
   id: z.string(),
   counterId: z.string(),
-  incrementValue: z.number(),
+  incrementValue: z.number().min(1),
   latestValue: z.number(),
   createdAt: z.number(),
   labels: z.array(z.string()),

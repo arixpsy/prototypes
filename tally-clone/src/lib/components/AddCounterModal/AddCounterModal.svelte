@@ -20,6 +20,8 @@
     type IResetType,
   } from "@/utils/types";
 
+  export let isVisible: boolean = false;
+
   let title = "";
   let titleRef: HTMLInputElement;
   let type: IResetType = RESET_TYPE.DAY;
@@ -30,7 +32,6 @@
   let increment: number = 1;
   const dispatch = createEventDispatcher();
 
-  $: ({ isVisible, ...ModalProps } = $$props);
   $: resetTypeValues = Object.entries(RESET_TYPE);
   $: if (isVisible) {
     titleRef.focus();
@@ -88,12 +89,11 @@
 
 <Modal
   {isVisible}
-  {...ModalProps}
   on:modal-confirm={handleFormSubmit}
   on:modal-cancel={handleFormCancel}
   on:modal-close={handleFormClose}
 >
-  <p class="text-3xl mb-3">NEW</p>
+  <p class="text-3xl mb-3">Create</p>
 
   <form
     on:submit|preventDefault={handleFormSubmit}
@@ -123,7 +123,7 @@
       </div>
     </div>
     <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Counter Increment:</p>
+      <p class="text-sm text-gray-500 mb-3">Counter increment:</p>
       <IncrementInput
         bind:value={increment}
         bind:isCustom={hasCustomIncrement}

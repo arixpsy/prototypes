@@ -3,7 +3,7 @@
   import { KEY_EVENT } from "@/utils/types";
 
   export let value: string;
-  export let ref: HTMLInputElement;
+  export let ref: HTMLInputElement | undefined = undefined;
 
   const inputTextClasses = "text-sm";
 

@@ -4,10 +4,10 @@
 
   export let value: number;
   export let ref: HTMLInputElement | undefined = undefined;
-  export let tabindex : number;
+  export let tabindex: number = 0;
   export { forwardClasses as class };
 
-  let forwardClasses: string;
+  let forwardClasses: string = "";
   const inputTextClasses = "text-sm";
 
   const inputContainerClasses =
@@ -20,10 +20,10 @@
   const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
-    switch(e.keyCode) {
+    switch (e.keyCode) {
       case KEY_EVENT.ENTER:
         dispatch("input-submit");
-        return; 
+        return;
     }
   }
 </script>
