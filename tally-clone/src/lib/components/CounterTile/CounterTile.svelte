@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
   import { DateTime, type DateTimeUnit, type ToRelativeUnit } from "luxon";
   import { nanoid } from "nanoid";
   import { scale } from "svelte/transition";
@@ -15,6 +16,7 @@
   $: currentCount = getCurrentCount(counter, $latestRecord);
   $: counterTypeLabel = getCounterTypeLabel(counter);
 
+  const dispatch = createEventDispatcher<{ "custom-increment": string }>();
   const latestRecord = derived(records, ($records) =>
     $records.find((record) => record.counterId == counter.id)
   );
@@ -29,7 +31,7 @@
 
   function handleClickCounter() {
     if (counter.incrementValue === 0) {
-      alert("open Modal");
+      dispatch("custom-increment", counter.id);
       return;
     }
     handleCounterIncrement(counter.incrementValue);
