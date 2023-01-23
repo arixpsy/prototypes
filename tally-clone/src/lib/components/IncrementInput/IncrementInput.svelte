@@ -69,7 +69,7 @@
 
   {#if !isCustom}
     <div
-      transition:slide={{ duration: 500 }}
+      transition:slide|local={{ duration: 500 }}
       class="flex justify-center items-center gap-6 mt-6"
     >
       <button

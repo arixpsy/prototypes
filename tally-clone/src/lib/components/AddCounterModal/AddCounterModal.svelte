@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, tick } from "svelte";
   import { nanoid } from "nanoid";
   import { DateTime } from "luxon";
   import {
@@ -34,6 +34,11 @@
 
   $: resetTypeValues = Object.entries(RESET_TYPE);
   $: if (isVisible) {
+    focusFirstField();
+  }
+
+  async function focusFirstField() {
+    await tick();
     titleRef.focus();
   }
 

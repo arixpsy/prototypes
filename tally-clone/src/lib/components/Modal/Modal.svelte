@@ -3,6 +3,7 @@
   import { createEventDispatcher } from "svelte";
   import { Button } from "@/lib/components";
   import { KEY_EVENT } from "@/utils/types";
+  import { fade } from "svelte/transition";
 
   export let isVisible = false;
   export let confirmText = "Confirm";
@@ -25,39 +26,39 @@
     dispatch("modal-cancel");
   }
 
-  // TODO: handle conditional rendering to prevent focusable
 </script>
 
 <Portal target="body">
-  <div
-    class="fixed inset-0 flex justify-center items-center transition-opacity duration-300 z-20"
-    class:opacity-0={!isVisible}
-    class:pointer-events-none={!isVisible}
-    on:keyup={handleKeyUp}
-  >
+  {#if isVisible}
     <div
-      class="absolute bg-black opacity-50 h-full w-full"
-      on:click={handleClose}
-      on:keypress={() => {}}
-    />
-    <div
-      class={`absolute flex flex-col bg-white h-full max-h-full sm:h-fit w-full sm:w-fit sm:rounded-lg`}
+      class="fixed inset-0 flex justify-center items-center z-20"
+      on:keyup={handleKeyUp}
+      transition:fade
     >
-      <!-- Content -->
-      <div class="p-6 h-full overflow-auto">
-        <slot />
-      </div>
+      <div
+        class="absolute bg-black opacity-50 h-full w-full"
+        on:click={handleClose}
+        on:keypress={() => {}}
+      />
+      <div
+        class={`absolute flex flex-col bg-white h-full max-h-full sm:h-fit w-full sm:w-fit sm:rounded-lg`}
+      >
+        <!-- Content -->
+        <div class="p-6 h-full overflow-auto">
+          <slot />
+        </div>
 
-      <!-- Footer -->
-      <div class="p-6 flex space-x-6 h-24">
-        <Button text={cancelText} on:click={handleCancel} block />
-        <Button
-          text={confirmText}
-          color="primary"
-          on:click={handleOnConfirm}
-          block
-        />
+        <!-- Footer -->
+        <div class="p-6 flex space-x-6 h-24">
+          <Button text={cancelText} on:click={handleCancel} block />
+          <Button
+            text={confirmText}
+            color="primary"
+            on:click={handleOnConfirm}
+            block
+          />
+        </div>
       </div>
     </div>
-  </div>
+  {/if}
 </Portal>
