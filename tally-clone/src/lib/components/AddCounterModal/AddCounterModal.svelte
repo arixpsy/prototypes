@@ -148,7 +148,7 @@
           <NumberInput
             bind:value={target}
             class="flex-1"
-            tabIndex={hasTarget ? 0 : -1}
+            tabindex={hasTarget ? 0 : -1}
             on:input-submit={handleFormSubmit}
           />
         </div>

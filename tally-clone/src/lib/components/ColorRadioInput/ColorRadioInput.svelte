@@ -5,7 +5,6 @@
   export let value: string = "";
   export let group: string = "";
 
-  $: ({ ...InputProps } = $$props);
   $: isSelected = value === group;
 
   const dispatch = createEventDispatcher();
@@ -36,7 +35,7 @@
     class:h-5={isSelected}
     class:w-5={isSelected}
   />
-  <input type="radio" bind:group {value} {...InputProps} class="hidden" />
+  <input type="radio" bind:group {value} class="hidden" />
 </label>
 
 <style>

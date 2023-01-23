@@ -4,7 +4,6 @@
 
   export let value: string;
   export let ref: HTMLInputElement;
-  $: ({ ...InputProps } = $$props);
 
   const inputTextClasses = "text-sm";
 
@@ -30,7 +29,6 @@
   type="text"
   bind:value
   bind:this={ref}
-  {...InputProps}
   class={inputClasses}
   on:keyup={handleKeyUp}
 />

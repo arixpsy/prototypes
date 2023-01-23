@@ -2,10 +2,10 @@
   import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
 
+  export let name: string = "";
   export let value: string = "";
   export let group: string = "";
 
-  $: ({ ...InputProps } = $$props);
   $: isSelected = value === group;
 
   const dispatch = createEventDispatcher();
@@ -35,7 +35,7 @@
   class:onSelected={isSelected}
   on:keyup={handleKeyUp}
 >
-  <input type="radio" bind:group {value} {...InputProps} class="hidden" />
+  <input type="radio" bind:group {value} {name} class="hidden" />
   {value}</label
 >
 

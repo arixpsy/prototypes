@@ -4,9 +4,8 @@
 
   export let value: number;
   export let ref: HTMLInputElement | undefined = undefined;
+  export let tabindex : number;
   export { forwardClasses as class };
-
-  $: ({ ...InputProps } = $$props);
 
   let forwardClasses: string;
   const inputTextClasses = "text-sm";
@@ -33,7 +32,7 @@
   type="number"
   bind:value
   bind:this={ref}
-  {...InputProps}
   class={inputClasses}
+  {tabindex}
   on:keyup={handleKeyUp}
 />
