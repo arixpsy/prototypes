@@ -15,6 +15,7 @@
 
   function handleGlobalKeyPress(e: KeyboardEvent) {
     if (isAddModalOpen) return;
+    if (isCustomIncrementModalOpen) return;
     switch (e.keyCode) {
       case KEY_EVENT.N_KEY:
         toggleAddModalOpen();

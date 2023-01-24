@@ -11,6 +11,7 @@ import ColorRadioInput from "@/lib/components/ColorRadioInput/ColorRadioInput.sv
 import IncrementInput from "@/lib/components/IncrementInput/IncrementInput.svelte";
 import IncrementPreviewTile from "@/lib/components/IncrementPreviewTile/IncrementPreviewTile.svelte";
 import CustomIncrementModal from "@/lib/components/CustomIncrementModal/CustomIncrementModal.svelte";
+import CustomLabelInput from "@/lib/components/CustomLabelInput/CustomLabelInput.svelte";
 
 export {
   AddCounterModal,
@@ -26,4 +27,5 @@ export {
   IncrementInput,
   IncrementPreviewTile,
   CustomIncrementModal,
+  CustomLabelInput,
 };

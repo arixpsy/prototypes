@@ -2,7 +2,12 @@
   import { createEventDispatcher, tick } from "svelte";
   import { nanoid } from "nanoid";
   import { records } from "@/lib/store/records";
-  import { IncrementPreviewTile, Modal } from "@/lib/components";
+  import { labels } from "@/lib/store/labels";
+  import {
+    IncrementPreviewTile,
+    Modal,
+    CustomLabelInput,
+  } from "@/lib/components";
   import NumberInput from "@/lib/components/NumberInput/NumberInput.svelte";
   import TextInput from "@/lib/components/TextInput/TextInput.svelte";
   import { RecordSchema, type CustomIncrementEvent } from "@/utils/types";
@@ -14,7 +19,7 @@
   let increment: number = 1;
   let incrementRef: HTMLInputElement;
   let description: string = "";
-  let labels: Array<string> = [];
+  let recordLabels: Array<string> = [];
 
   $: counterValue = customIncrementEvent?.latestValue || 0;
   $: counterTitle = customIncrementEvent?.counterTitle || "";
@@ -33,7 +38,7 @@
   function handleResetForm() {
     increment = 1;
     description = "";
-    labels = [];
+    recordLabels = [];
   }
 
   function handleFormSubmit() {
@@ -44,10 +49,11 @@
         incrementValue: increment,
         latestValue: counterValue + increment,
         createdAt: DateTime.now().toSeconds(),
-        labels: [],
+        labels: recordLabels,
         description,
       });
 
+      $labels = [...new Set([...$labels, ...recordLabels])];
       $records = [newRecord, ...$records];
 
       dispatch("modal-close");
@@ -97,6 +103,10 @@
 
     <div class="flex flex-col">
       <p class="text-sm text-gray-500 mb-3">Labels:</p>
+      <CustomLabelInput
+        bind:value={recordLabels}
+        on:input-submit={handleFormSubmit}
+      />
     </div>
 
     <div class="flex flex-col">
