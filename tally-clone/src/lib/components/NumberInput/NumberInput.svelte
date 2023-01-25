@@ -7,16 +7,13 @@
   export let tabindex: number = 0;
   export { forwardClasses as class };
 
-  let forwardClasses: string = "";
+  const forwardClasses: string = "";
   const inputTextClasses = "text-sm";
-
   const inputContainerClasses =
     "block w-full p-2.5 rounded-lg border-2 outline-none transition-colors";
-
-  const inputColorClasses = `bg-gray-50 text-gray-900 border-gray-50 focus:border-blue-700 `;
-
+  const inputColorClasses =
+    "bg-gray-50 text-gray-900 border-gray-50 focus:border-blue-700";
   const inputClasses = `${inputTextClasses} ${inputContainerClasses} ${inputColorClasses} ${forwardClasses}`;
-
   const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {

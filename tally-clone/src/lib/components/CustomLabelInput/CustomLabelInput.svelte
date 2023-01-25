@@ -1,20 +1,20 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { KEY_EVENT } from "@/utils/types";
+  import { derived } from "svelte/store";
   import { fade } from "svelte/transition";
+  import { KEY_EVENT } from "@/utils/types";
   import { labels } from "@/lib/store/labels";
   import LabelPill from "@/lib/components/CustomLabelInput/LabelPill.svelte";
-  import { derived } from "svelte/store";
 
   export let value: Array<string>;
 
   let inputValue: string = "";
   let inputRef: HTMLInputElement;
+  const dispatch = createEventDispatcher();
+
   $: filterLabels = derived(labels, ($labels) =>
     $labels.filter((v) => v.includes(inputValue))
   );
-
-  const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {

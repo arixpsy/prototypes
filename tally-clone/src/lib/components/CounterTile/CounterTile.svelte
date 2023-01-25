@@ -1,8 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { derived } from "svelte/store";
+  import { scale } from "svelte/transition";
   import { DateTime, type DateTimeUnit, type ToRelativeUnit } from "luxon";
   import { nanoid } from "nanoid";
-  import { scale } from "svelte/transition";
   import { records } from "@/lib/store/records";
   import {
     KEY_EVENT,
@@ -10,7 +11,6 @@
     type ICounter,
     type IRecord,
   } from "@/utils/types";
-  import { derived } from "svelte/store";
   import {
     getCounterTypeLabel,
     getCurrentCount,

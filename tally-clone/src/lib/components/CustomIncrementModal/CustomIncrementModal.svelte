@@ -20,6 +20,7 @@
   let incrementRef: HTMLInputElement;
   let description: string = "";
   let recordLabels: Array<string> = [];
+  const dispatch = createEventDispatcher();
 
   $: counterValue = customIncrementEvent?.latestValue || 0;
   $: counterTitle = customIncrementEvent?.counterTitle || "";
@@ -27,8 +28,6 @@
   $: if (isVisible) {
     focusFirstField();
   }
-
-  const dispatch = createEventDispatcher();
 
   async function focusFirstField() {
     await tick();

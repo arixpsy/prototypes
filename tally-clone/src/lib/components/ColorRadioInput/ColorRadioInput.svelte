@@ -5,9 +5,9 @@
   export let value: string = "";
   export let group: string = "";
 
-  $: isSelected = value === group;
-
   const dispatch = createEventDispatcher();
+
+  $: isSelected = value === group;
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {

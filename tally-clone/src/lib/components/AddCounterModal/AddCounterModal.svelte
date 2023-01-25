@@ -16,7 +16,7 @@
     CounterSchema,
     COUNTER_COLOR,
     RESET_TYPE,
-    type ICounter,
+    type ICounterColor,
     type IResetType,
   } from "@/utils/types";
 
@@ -87,7 +87,7 @@
     type = event.detail;
   }
 
-  function handleColorRadioSelect(event: CustomEvent<IResetType>) {
+  function handleColorRadioSelect(event: CustomEvent<ICounterColor>) {
     color = event.detail;
   }
 </script>

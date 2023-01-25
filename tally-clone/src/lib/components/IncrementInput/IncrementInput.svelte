@@ -6,6 +6,8 @@
   export let value: number;
   export let isCustom: boolean;
 
+  const dispatch = createEventDispatcher();
+
   $: if (isCustom) {
     value = 0;
   }
@@ -13,8 +15,6 @@
   $: if (!isCustom) {
     value = 1;
   }
-
-  const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
     switch (e.keyCode) {

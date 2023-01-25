@@ -2,7 +2,8 @@
   import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
 
-  export let isToggle: boolean;
+  export let isToggle: boolean = false;
+
   const dispatch = createEventDispatcher();
 
   function handleKeyUp(e: KeyboardEvent) {
