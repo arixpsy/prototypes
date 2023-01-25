@@ -31,17 +31,19 @@
     }
   }
 
-  function handleOptionKeyUp(e: KeyboardEvent, label?: string) {
-    switch (e.keyCode) {
-      case KEY_EVENT.ENTER:
-        handleAddLabel(label);
-        focusInput();
-        return;
-      case KEY_EVENT.SPACE:
-        handleAddLabel(label);
-        focusInput();
-        return;
-    }
+  function handleOptionKeyUp(label?: string) {
+    return (e: KeyboardEvent) => {
+      switch (e.keyCode) {
+        case KEY_EVENT.ENTER:
+          handleAddLabel(label);
+          focusInput();
+          return;
+        case KEY_EVENT.SPACE:
+          handleAddLabel(label);
+          focusInput();
+          return;
+      }
+    };
   }
 
   function handleAddLabel(existingLabel?: string) {
@@ -93,7 +95,7 @@
         tabindex="0"
         class="p-2.5 hover:bg-blue-100 cursor-pointer transition-colors"
         on:click={() => handleAddLabel()}
-        on:keyup={(e) => handleOptionKeyUp(e)}
+        on:keyup={handleOptionKeyUp()}
       >
         {inputValue}
       </div>
@@ -105,7 +107,7 @@
           tabindex="0"
           class="flex p-2.5 hover:bg-blue-100 cursor-pointer transition-colors"
           on:click={() => handleAddLabel(label)}
-          on:keyup={(e) => handleOptionKeyUp(e, label)}
+          on:keyup={handleOptionKeyUp(label)}
         >
           {label}
         </div>
