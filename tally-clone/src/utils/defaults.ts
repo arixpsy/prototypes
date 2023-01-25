@@ -8,10 +8,12 @@ export const defaultCounterStoreValues: Array<ICounter> = [
     title: "Vitamins",
     createdAt: DateTime.now().toSeconds(),
     resetType: "Day",
-    target: null,
+    target: 0,
     color: COUNTER_COLOR[0],
     incrementValue: 1,
   },
 ];
 
 export const defaultRecordStoreValues: Array<IRecord> = [];
+
+export const defaultLabelsStoreValues: Array<IRecord> = [];
