@@ -24,18 +24,6 @@
     }
   }
 
-  function handleNewCounterTileKeyPress(e: KeyboardEvent) {
-    if (isAddModalOpen) return;
-    switch (e.keyCode) {
-      case KEY_EVENT.ENTER:
-        toggleAddModalOpen();
-        return;
-      case KEY_EVENT.SPACE:
-        toggleAddModalOpen();
-        return;
-    }
-  }
-
   function toggleAddModalOpen() {
     isAddModalOpen = !isAddModalOpen;
   }

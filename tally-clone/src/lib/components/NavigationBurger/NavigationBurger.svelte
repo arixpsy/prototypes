@@ -2,7 +2,6 @@
   import { createEventDispatcher, tick } from "svelte";
   import { fade, fly } from "svelte/transition";
   import { Icon } from "@/lib/components";
-  import { KEY_EVENT } from "@/utils/types";
 
   export let isOpen: boolean = false;
 
@@ -66,3 +65,9 @@
     {/if}
   </button>
 </div>
+
+<style>
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
