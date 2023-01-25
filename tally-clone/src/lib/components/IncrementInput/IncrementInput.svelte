@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Icon } from "@/lib/components";
   import { KEY_EVENT } from "@/utils/types";
   import { createEventDispatcher } from "svelte";
   import { slide, fade } from "svelte/transition";
@@ -76,20 +77,8 @@
         class="flex justify-center items-center rounded-full h-14 w-14 bg-gray-200 hover:bg-gray-300 transition-colors"
         on:click|preventDefault={handleDecrementCounter}
         transition:fade
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 12h-15"
-          />
-        </svg>
+      >
+        <Icon.Minus />
       </button>
 
       <p class="text-2xl w-16 text-center" transition:fade>{value}</p>
@@ -99,20 +88,7 @@
         on:click|preventDefault={handleIncrementCounter}
         transition:fade
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
+        <Icon.Plus />
       </button>
     </div>
   {/if}

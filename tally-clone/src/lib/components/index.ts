@@ -12,6 +12,21 @@ import IncrementInput from "@/lib/components/IncrementInput/IncrementInput.svelt
 import IncrementPreviewTile from "@/lib/components/IncrementPreviewTile/IncrementPreviewTile.svelte";
 import CustomIncrementModal from "@/lib/components/CustomIncrementModal/CustomIncrementModal.svelte";
 import CustomLabelInput from "@/lib/components/CustomLabelInput/CustomLabelInput.svelte";
+import NavigationBurger from "@/lib/components/NavigationBurger/NavigationBurger.svelte";
+
+import Burger from "@/lib/components/Icons/Burger.svelte";
+import Cross from "@/lib/components/Icons/Cross.svelte";
+import Minus from "@/lib/components/Icons/Minus.svelte";
+import Plus from "@/lib/components/Icons/Plus.svelte";
+import ChevronRight from "@/lib/components/Icons/ChevronRight.svelte";
+
+const Icon = {
+  Burger,
+  Cross,
+  Plus,
+  Minus,
+  ChevronRight,
+};
 
 export {
   AddCounterModal,
@@ -28,4 +43,6 @@ export {
   IncrementPreviewTile,
   CustomIncrementModal,
   CustomLabelInput,
+  NavigationBurger,
+  Icon,
 };
