@@ -13,7 +13,7 @@
   let isCustomIncrementModalOpen = false;
   let customIncrementEvent: CustomIncrementEvent | undefined = undefined;
 
-  function handleGlobalKeyPress(e: KeyboardEvent) {
+  function handleGlobalKeyUp(e: KeyboardEvent) {
     if (isAddModalOpen) return;
     if (isCustomIncrementModalOpen) return;
     switch (e.keyCode) {
@@ -52,7 +52,7 @@
   }
 </script>
 
-<svelte:window on:keyup={handleGlobalKeyPress} bind:scrollY />
+<svelte:window on:keyup={handleGlobalKeyUp} bind:scrollY />
 
 <main class="min-h-screen bg-white">
   <div class="container mx-auto h-screen pt-9">
