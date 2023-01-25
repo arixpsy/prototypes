@@ -1,15 +1,16 @@
 <script lang="ts">
   import {
     CounterTile,
-    NewCounterTile,
     AddCounterModal,
     CustomIncrementModal,
+    NavigationBurger,
   } from "@/lib/components";
   import { counters } from "@/lib/store/counters";
   import { KEY_EVENT, type CustomIncrementEvent } from "@/utils/types";
 
-  let isAddModalOpen = false;
   let scrollY: number;
+  let isMenuOpen: boolean = false;
+  let isAddModalOpen = false;
   let isCustomIncrementModalOpen = false;
   let customIncrementEvent: CustomIncrementEvent | undefined = undefined;
 
@@ -68,12 +69,10 @@
       {#each $counters as counter (counter.id)}
         <CounterTile {counter} on:custom-increment={handleCustomIncrement} />
       {/each}
-      <NewCounterTile
-        on:click={toggleAddModalOpen}
-        on:keyup={handleNewCounterTileKeyPress}
-      />
     </div>
   </div>
+
+  <NavigationBurger isOpen={isMenuOpen} on:new-counter={toggleAddModalOpen} />
 
   <AddCounterModal
     isVisible={isAddModalOpen}
