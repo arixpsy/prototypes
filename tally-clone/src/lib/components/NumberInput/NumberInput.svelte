@@ -7,7 +7,7 @@
   export let tabindex: number = 0;
   export { forwardClasses as class };
 
-  const forwardClasses: string = "";
+  let forwardClasses: string = "";
   const inputTextClasses = "text-sm";
   const inputContainerClasses =
     "block w-full p-2.5 rounded-lg border-2 outline-none transition-colors";
