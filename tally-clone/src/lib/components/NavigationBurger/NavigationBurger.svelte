@@ -17,11 +17,17 @@
     },
     {
       icon: Icon.Pencil,
-      onClick: () => dispatch("edit-mode"),
+      onClick: () => {
+        isOpen = false;
+        dispatch("edit-mode");
+      },
     },
     {
       icon: Icon.Calendar,
-      onClick: () => dispatch("view-history"),
+      onClick: () => {
+        isOpen = false;
+        dispatch("view-history");
+      },
     },
   ];
 

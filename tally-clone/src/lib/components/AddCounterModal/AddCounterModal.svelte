@@ -27,6 +27,7 @@
   let type: IResetType = RESET_TYPE.DAY;
   let hasTarget: boolean = false;
   let target: number = 0;
+  let targetRef: HTMLInputElement;
   let color: string = COUNTER_COLOR[0];
   let hasCustomIncrement: boolean = false;
   let increment: number = 1;
@@ -36,10 +37,18 @@
   $: if (isVisible) {
     focusFirstField();
   }
+  $: if (hasTarget) {
+    focusTargetRef();
+  }
 
   async function focusFirstField() {
     await tick();
     titleRef.focus();
+  }
+
+  async function focusTargetRef() {
+    await tick();
+    targetRef.focus();
   }
 
   function handleResetForm() {
@@ -151,6 +160,7 @@
         >
           <p class="text-sm text-gray-500 flex-none">Target:</p>
           <NumberInput
+            bind:ref={targetRef}
             bind:value={target}
             class="flex-1"
             tabindex={hasTarget ? 0 : -1}
