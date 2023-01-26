@@ -10,6 +10,7 @@
     SwitchInput,
     ColorRadioInput,
     IncrementInput,
+    FormItem,
   } from "@/lib/components/";
   import { counters } from "@/lib/store/counters";
   import {
@@ -114,17 +115,15 @@
     on:submit|preventDefault={handleFormSubmit}
     class="flex flex-col space-y-6"
   >
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">What are you counting?</p>
+    <FormItem label="What are you counting?">
       <TextInput
         bind:value={title}
         bind:ref={titleRef}
         on:input-submit={handleFormSubmit}
       />
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Resets every:</p>
+    <FormItem label="Resets every:">
       <div class="flex gap-3 flex-wrap">
         {#each resetTypeValues as [resetKey, resetType] (resetKey)}
           <RadioInput
@@ -136,18 +135,17 @@
           />
         {/each}
       </div>
-    </div>
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Counter increment:</p>
+    </FormItem>
+
+    <FormItem label="Counter increment:">
       <IncrementInput
         bind:value={increment}
         bind:isCustom={hasCustomIncrement}
         on:switch-submit={handleFormSubmit}
       />
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Set a target?</p>
+    <FormItem label="Set a target?">
       <div class="flex flex-wrap items-center gap-3">
         <SwitchInput
           bind:isToggle={hasTarget}
@@ -166,10 +164,9 @@
           </div>
         {/if}
       </div>
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Pick a color:</p>
+    <FormItem label="Pick a color:">
       <div class="flex flex-wrap gap-3 max-w-xl">
         {#each COUNTER_COLOR as counterColor, i (i)}
           <ColorRadioInput
@@ -180,7 +177,7 @@
           />
         {/each}
       </div>
-    </div>
+    </FormItem>
 
     <input type="submit" class="invisible h-0" />
   </form>

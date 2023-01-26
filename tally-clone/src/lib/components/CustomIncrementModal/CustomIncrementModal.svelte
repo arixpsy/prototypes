@@ -7,6 +7,7 @@
     IncrementPreviewTile,
     Modal,
     CustomLabelInput,
+    FormItem,
   } from "@/lib/components";
   import NumberInput from "@/lib/components/NumberInput/NumberInput.svelte";
   import TextInput from "@/lib/components/TextInput/TextInput.svelte";
@@ -86,36 +87,32 @@
     on:submit|preventDefault={handleFormSubmit}
     class="flex flex-col space-y-6"
   >
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">What amount?</p>
+    <FormItem label="What amount?">
       <NumberInput
         bind:value={increment}
         bind:ref={incrementRef}
         on:input-submit={handleFormSubmit}
       />
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Short description:</p>
+    <FormItem label="Short description:">
       <TextInput bind:value={description} on:input-submit={handleFormSubmit} />
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Labels:</p>
+    <FormItem label="Labels:">
       <CustomLabelInput
         bind:value={recordLabels}
         on:input-submit={handleFormSubmit}
       />
-    </div>
+    </FormItem>
 
-    <div class="flex flex-col">
-      <p class="text-sm text-gray-500 mb-3">Preview:</p>
+    <FormItem label="Preview:">
       <IncrementPreviewTile
         {counterTitle}
         {counterValue}
         {counterColor}
         {increment}
       />
-    </div>
+    </FormItem>
   </form>
 </Modal>
