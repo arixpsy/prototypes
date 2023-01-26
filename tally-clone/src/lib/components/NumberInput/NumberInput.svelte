@@ -4,7 +4,6 @@
 
   export let value: number;
   export let ref: HTMLInputElement | undefined = undefined;
-  export let tabindex: number = 0;
   export { forwardClasses as class };
 
   let forwardClasses: string = "";
@@ -30,6 +29,5 @@
   bind:value
   bind:this={ref}
   class={inputClasses}
-  {tabindex}
   on:keyup={handleKeyUp}
 />

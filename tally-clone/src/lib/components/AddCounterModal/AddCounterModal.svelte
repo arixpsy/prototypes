@@ -19,6 +19,7 @@
     type ICounterColor,
     type IResetType,
   } from "@/utils/types";
+  import { fade } from "svelte/transition";
 
   export let isVisible: boolean = false;
 
@@ -153,20 +154,17 @@
           on:switch-submit={handleFormSubmit}
         />
 
-        <div
-          class="flex items-center flex-wrap flex-1 gap-3 transition-opacity"
-          class:opacity-0={!hasTarget}
-          class:pointer-events-none={!hasTarget}
-        >
-          <p class="text-sm text-gray-500 flex-none">Target:</p>
-          <NumberInput
-            bind:ref={targetRef}
-            bind:value={target}
-            class="flex-1"
-            tabindex={hasTarget ? 0 : -1}
-            on:input-submit={handleFormSubmit}
-          />
-        </div>
+        {#if hasTarget}
+          <div class="flex items-center flex-wrap flex-1 gap-3" transition:fade>
+            <p class="text-sm text-gray-500 flex-none">Target:</p>
+            <NumberInput
+              bind:ref={targetRef}
+              bind:value={target}
+              class="flex-1"
+              on:input-submit={handleFormSubmit}
+            />
+          </div>
+        {/if}
       </div>
     </div>
 
