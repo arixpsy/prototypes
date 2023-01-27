@@ -61,6 +61,7 @@ export function useForm<T extends Object>({
           errorMap[formInputKey] = issue.message;
         }
         errors.set(errorMap);
+        // TODO: focus first error
       } else {
         console.debug(e);
       }
