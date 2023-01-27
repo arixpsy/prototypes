@@ -1,7 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher, tick } from "svelte";
+  import { fade } from "svelte/transition";
   import { nanoid } from "nanoid";
   import { DateTime } from "luxon";
+  import type { z } from "zod";
   import {
     Modal,
     TextInput,
@@ -15,27 +17,53 @@
   import { counters } from "@/lib/store/counters";
   import {
     RESET_TYPE,
-    CounterSchema,
+    type ICounter,
     COUNTER_COLOR,
     type ICounterColor,
     type IResetType,
+    CounterFormSchema,
   } from "@/@types/counters";
-  import { fade } from "svelte/transition";
+  import { useForm } from "@/lib/hooks/useForm";
 
   export let isVisible: boolean = false;
 
-  let title = "";
-  let titleRef: HTMLInputElement;
-  let type: IResetType = RESET_TYPE.DAY;
-  let hasTarget: boolean = false;
-  let target: number = 0;
-  let targetRef: HTMLInputElement;
-  let color: string = COUNTER_COLOR[0];
-  let hasCustomIncrement: boolean = false;
-  let increment: number = 1;
+  const {
+    form,
+    refs,
+    errors,
+    onSubmit: handleFormSubmit,
+    resetForm: handleResetForm,
+  } = useForm({
+    schema: CounterFormSchema,
+    defaultValues: {
+      title: "",
+      resetType: RESET_TYPE.DAY,
+      hasTarget: false,
+      target: 0,
+      color: COUNTER_COLOR[0],
+      hasCustomIncrement: false,
+      incrementValue: 1,
+    },
+    onSubmitCallback: (values: z.infer<typeof CounterFormSchema>) => {
+      const { title, resetType, incrementValue, target, color } = values;
+      const newCounter: ICounter = {
+        id: nanoid(),
+        title,
+        resetType,
+        incrementValue,
+        target,
+        color,
+        createdAt: DateTime.now().toSeconds(),
+      };
+      $counters = [...$counters, newCounter];
+      dispatch("modal-close");
+      handleResetForm();
+    },
+  });
   const dispatch = createEventDispatcher();
 
   $: resetTypeValues = Object.entries(RESET_TYPE);
+  $: ({ hasTarget } = form);
   $: if (isVisible) {
     focusFirstField();
   }
@@ -45,43 +73,12 @@
 
   async function focusFirstField() {
     await tick();
-    titleRef.focus();
+    refs.title?.focus();
   }
 
   async function focusTargetRef() {
     await tick();
-    targetRef.focus();
-  }
-
-  function handleResetForm() {
-    title = "";
-    type = "Day";
-    hasTarget = false;
-    target = 0;
-    color = COUNTER_COLOR[0];
-    hasCustomIncrement = false;
-    increment = 1;
-  }
-
-  function handleFormSubmit() {
-    try {
-      const newCounter = CounterSchema.parse({
-        id: nanoid(),
-        title,
-        resetType: type,
-        incrementValue: increment,
-        target,
-        color,
-        createdAt: DateTime.now().toSeconds(),
-      });
-
-      $counters = [...$counters, newCounter];
-      dispatch("modal-close");
-      handleResetForm();
-    } catch (error) {
-      // TODO: handle error notifs
-      console.table(error);
-    }
+    refs.target?.focus();
   }
 
   function handleFormCancel() {
@@ -95,11 +92,11 @@
   }
 
   function handleRadioSelect(event: CustomEvent<IResetType>) {
-    type = event.detail;
+    form.resetType = event.detail;
   }
 
   function handleColorRadioSelect(event: CustomEvent<ICounterColor>) {
-    color = event.detail;
+    form.color = event.detail;
   }
 </script>
 
@@ -113,13 +110,13 @@
 
   <form
     on:submit|preventDefault={handleFormSubmit}
-    class="flex flex-col space-y-6"
+    class="flex flex-col"
   >
-    <FormItem label="What are you counting?">
+    <FormItem label="What are you counting?" errorMessage={$errors.title}>
       <TextInput
-        bind:value={title}
-        bind:ref={titleRef}
-        on:input-submit={handleFormSubmit}
+        bind:value={form.title}
+        bind:ref={refs.title}
+        hasError={!!$errors.title}
       />
     </FormItem>
 
@@ -128,7 +125,7 @@
         {#each resetTypeValues as [resetKey, resetType] (resetKey)}
           <RadioInput
             name="reset_type"
-            bind:group={type}
+            bind:group={form.resetType}
             value={resetType}
             on:radio-select={handleRadioSelect}
             on:radio-submit={handleFormSubmit}
@@ -139,8 +136,8 @@
 
     <FormItem label="Counter increment:">
       <IncrementInput
-        bind:value={increment}
-        bind:isCustom={hasCustomIncrement}
+        bind:value={form.incrementValue}
+        bind:isCustom={form.hasCustomIncrement}
         on:switch-submit={handleFormSubmit}
       />
     </FormItem>
@@ -148,18 +145,17 @@
     <FormItem label="Set a target?">
       <div class="flex flex-wrap items-center gap-3">
         <SwitchInput
-          bind:isToggle={hasTarget}
+          bind:isToggle={form.hasTarget}
           on:switch-submit={handleFormSubmit}
         />
 
-        {#if hasTarget}
+        {#if form.hasTarget}
           <div class="flex items-center flex-wrap flex-1 gap-3" transition:fade>
             <p class="text-sm text-gray-500 flex-none">Target:</p>
             <NumberInput
-              bind:ref={targetRef}
-              bind:value={target}
+              bind:ref={refs.target}
+              bind:value={form.target}
               class="flex-1"
-              on:input-submit={handleFormSubmit}
             />
           </div>
         {/if}
@@ -170,7 +166,7 @@
       <div class="flex flex-wrap gap-3 max-w-xl">
         {#each COUNTER_COLOR as counterColor, i (i)}
           <ColorRadioInput
-            bind:group={color}
+            bind:group={form.color}
             value={counterColor}
             on:radio-select={handleColorRadioSelect}
             on:radio-submit={handleFormSubmit}
@@ -179,6 +175,6 @@
       </div>
     </FormItem>
 
-    <input type="submit" class="invisible h-0" />
+    <input type="submit" class='hidden'/>
   </form>
 </Modal>

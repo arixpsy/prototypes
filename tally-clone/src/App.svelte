@@ -6,7 +6,8 @@
     NavigationBurger,
   } from "@/lib/components";
   import { counters } from "@/lib/store/counters";
-  import { KEY_EVENT, type CustomIncrementEvent } from "@/utils/types";
+  import { KEY_EVENT, } from "@/@types/commons";
+  import type { CustomIncrementEvent } from "@/@types/records";
 
   let scrollY: number;
   let isMenuOpen: boolean = false;
