@@ -4,6 +4,7 @@
 
   export let value: number;
   export let ref: HTMLInputElement | undefined = undefined;
+  export let hasError: boolean;
   export { forwardClasses as class };
 
   let forwardClasses: string = "";
@@ -30,4 +31,11 @@
   bind:this={ref}
   class={inputClasses}
   on:keyup={handleKeyUp}
+  class:has-error={hasError}
 />
+
+<style>
+  .has-error {
+    @apply border-red-500;
+  }
+</style>

@@ -1,8 +1,16 @@
 <script lang="ts">
-  export let label: string = '';
+  import { fade } from "svelte/transition";
+
+  export let label: string = "";
+  export let errorMessage: string = "";
 </script>
 
 <div class="flex flex-col">
-  <p class="text-sm text-gray-500 mb-3">{label}</p>
-  <slot></slot>
+  <p class="text-sm mb-3 text-gray-500">
+    {label}
+  </p>
+  <slot />
+  <div class="text-xs text-red-500 my-2 h-4">
+    {#if errorMessage}<p transition:fade>{errorMessage}</p>{/if}
+  </div>
 </div>

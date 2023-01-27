@@ -4,6 +4,7 @@
 
   export let value: string;
   export let ref: HTMLInputElement | undefined = undefined;
+  export let hasError: boolean;
 
   const inputTextClasses = "text-sm";
   const inputContainerClasses =
@@ -28,4 +29,11 @@
   bind:this={ref}
   class={inputClasses}
   on:keyup={handleKeyUp}
+  class:has-error={hasError}
 />
+
+<style>
+  .has-error {
+    @apply border-red-500;
+  }
+</style>
