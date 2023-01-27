@@ -44,7 +44,7 @@
       hasCustomIncrement: false,
       incrementValue: 1,
     },
-    onSubmitCallback: (values: z.infer<typeof CounterFormSchema>) => {
+    onSubmitCallback(values: z.infer<typeof CounterFormSchema>) {
       const { title, resetType, incrementValue, target, color } = values;
       const newCounter: ICounter = {
         id: nanoid(),
@@ -108,10 +108,7 @@
 >
   <p class="text-3xl mb-3">Create</p>
 
-  <form
-    on:submit|preventDefault={handleFormSubmit}
-    class="flex flex-col"
-  >
+  <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col">
     <FormItem label="What are you counting?" errorMessage={$errors.title}>
       <TextInput
         bind:value={form.title}
@@ -175,6 +172,6 @@
       </div>
     </FormItem>
 
-    <input type="submit" class='hidden'/>
+    <input type="submit" class="hidden" />
   </form>
 </Modal>
