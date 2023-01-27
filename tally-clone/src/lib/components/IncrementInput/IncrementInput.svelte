@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon } from "@/lib/components";
-  import { KEY_EVENT } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
   import { createEventDispatcher } from "svelte";
   import { slide, fade } from "svelte/transition";
 

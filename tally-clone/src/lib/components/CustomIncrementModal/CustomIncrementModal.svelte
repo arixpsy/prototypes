@@ -11,7 +11,7 @@
   } from "@/lib/components";
   import NumberInput from "@/lib/components/NumberInput/NumberInput.svelte";
   import TextInput from "@/lib/components/TextInput/TextInput.svelte";
-  import { RecordSchema, type CustomIncrementEvent } from "@/utils/types";
+  import { RecordSchema, type CustomIncrementEvent } from "@/@types/records";
   import { DateTime } from "luxon";
 
   export let customIncrementEvent: CustomIncrementEvent | undefined;

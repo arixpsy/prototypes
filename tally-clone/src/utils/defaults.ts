@@ -1,4 +1,5 @@
-import { COUNTER_COLOR, type ICounter, type IRecord } from "@/utils/types";
+import { COUNTER_COLOR, type ICounter } from "@/@types/counters";
+import type { IRecord } from "@/@types/records";
 import { nanoid } from "nanoid";
 import { DateTime } from "luxon";
 

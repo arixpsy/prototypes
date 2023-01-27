@@ -14,12 +14,12 @@
   } from "@/lib/components/";
   import { counters } from "@/lib/store/counters";
   import {
+    RESET_TYPE,
     CounterSchema,
     COUNTER_COLOR,
-    RESET_TYPE,
     type ICounterColor,
     type IResetType,
-  } from "@/utils/types";
+  } from "@/@types/counters";
   import { fade } from "svelte/transition";
 
   export let isVisible: boolean = false;

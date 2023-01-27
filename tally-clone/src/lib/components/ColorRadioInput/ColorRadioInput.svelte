@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { KEY_EVENT } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
   import { createEventDispatcher } from "svelte";
 
   export let value: string = "";

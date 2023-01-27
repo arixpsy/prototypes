@@ -2,7 +2,7 @@
   import Portal from "svelte-portal";
   import { createEventDispatcher } from "svelte";
   import { Button } from "@/lib/components";
-  import { KEY_EVENT } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
   import { fade } from "svelte/transition";
 
   export let isVisible = false;

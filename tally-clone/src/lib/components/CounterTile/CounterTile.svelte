@@ -5,12 +5,9 @@
   import { DateTime, type DateTimeUnit, type ToRelativeUnit } from "luxon";
   import { nanoid } from "nanoid";
   import { records } from "@/lib/store/records";
-  import {
-    KEY_EVENT,
-    type CustomIncrementEvent,
-    type ICounter,
-    type IRecord,
-  } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
+  import type { ICounter } from "@/@types/counters";
+  import type { CustomIncrementEvent, IRecord } from "@/@types/records";
   import {
     getCounterTypeLabel,
     getCurrentCount,

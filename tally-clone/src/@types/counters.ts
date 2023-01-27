@@ -1,15 +1,5 @@
 import { z } from "zod";
-
-type ObjectValues<T> = T[keyof T];
-
-export const KEY_EVENT = {
-  ENTER: 13,
-  ESC: 27,
-  SPACE: 32,
-  N_KEY: 78,
-} as const;
-
-export type IKeyEvent = ObjectValues<typeof KEY_EVENT>;
+import type { ObjectValues } from "@/@types/commons";
 
 export const RESET_TYPE = {
   DAY: "Day",
@@ -68,22 +58,3 @@ export const CounterSchema = z.object({
 });
 
 export type ICounter = z.infer<typeof CounterSchema>;
-
-export const RecordSchema = z.object({
-  id: z.string(),
-  counterId: z.string(),
-  incrementValue: z.number().min(1),
-  latestValue: z.number(),
-  createdAt: z.number(),
-  labels: z.array(z.string()),
-  description: z.string(),
-});
-
-export type IRecord = z.infer<typeof RecordSchema>;
-
-export type CustomIncrementEvent = {
-  counterId: string;
-  counterColor: ICounterColor;
-  counterTitle: string;
-  latestValue: number;
-};

@@ -1,10 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { KEY_EVENT } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
 
   export let value: number;
   export let ref: HTMLInputElement | undefined = undefined;
-  export let hasError: boolean;
+  export let hasError: boolean = false;
   export { forwardClasses as class };
 
   let forwardClasses: string = "";

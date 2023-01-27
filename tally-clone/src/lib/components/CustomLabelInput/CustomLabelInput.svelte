@@ -2,7 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import { derived } from "svelte/store";
   import { fade } from "svelte/transition";
-  import { KEY_EVENT } from "@/utils/types";
+  import { KEY_EVENT } from "@/@types/commons";
   import { labels } from "@/lib/store/labels";
   import LabelPill from "@/lib/components/CustomLabelInput/LabelPill.svelte";
 
