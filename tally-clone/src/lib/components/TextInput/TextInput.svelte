@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
-  import { KEY_EVENT } from "@/@types/commons";
-
   export let value: string;
   export let ref: HTMLInputElement | undefined = undefined;
   export let hasError: boolean = false;
@@ -12,15 +9,6 @@
   const inputColorClasses =
     "bg-gray-50 text-gray-900 border-gray-50 focus:border-blue-700";
   const inputClasses = `${inputTextClasses} ${inputContainerClasses} ${inputColorClasses}`;
-  const dispatch = createEventDispatcher();
-
-  function handleKeyUp(e: KeyboardEvent) {
-    switch (e.keyCode) {
-      case KEY_EVENT.ENTER:
-        dispatch("input-submit");
-        return;
-    }
-  }
 </script>
 
 <input
@@ -28,7 +16,6 @@
   bind:value
   bind:this={ref}
   class={inputClasses}
-  on:keyup={handleKeyUp}
   class:has-error={hasError}
 />
 

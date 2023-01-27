@@ -77,6 +77,7 @@
         class="flex justify-center items-center rounded-full h-14 w-14 bg-gray-200 hover:bg-gray-300 transition-colors"
         on:click|preventDefault={handleDecrementCounter}
         transition:fade
+        type="button"
       >
         <Icon.Minus />
       </button>
@@ -87,6 +88,7 @@
         class="flex justify-center items-center rounded-full h-14 w-14 bg-gray-200 hover:bg-gray-300 transition-colors"
         on:click|preventDefault={handleIncrementCounter}
         transition:fade
+        type="button"
       >
         <Icon.Plus />
       </button>
