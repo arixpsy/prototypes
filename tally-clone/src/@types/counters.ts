@@ -47,14 +47,31 @@ export const COUNTER_COLOR = [
 
 export type ICounterColor = typeof COUNTER_COLOR[number];
 
+const CounterTitle = z.string().min(1).max(15);
+const CounterResetType = z.nativeEnum(RESET_TYPE)
+const CounterTarget = z.number().min(0)
+const CounterColor = z.enum(COUNTER_COLOR)
+const CounterIncrement = z.number().min(0)
+
 export const CounterSchema = z.object({
   id: z.string(),
-  title: z.string().min(1).max(15),
+  title: CounterTitle,
+  resetType: CounterResetType,
+  target: CounterTarget,
+  color: CounterColor,
+  incrementValue: CounterIncrement,
   createdAt: z.number(),
-  resetType: z.nativeEnum(RESET_TYPE),
-  target: z.number().min(0),
-  color: z.enum(COUNTER_COLOR),
-  incrementValue: z.number().min(0),
 });
 
 export type ICounter = z.infer<typeof CounterSchema>;
+
+export const CounterFormSchema = z.object({
+  title: CounterTitle,
+  resetType: CounterResetType,
+  target: CounterTarget,
+  color: CounterColor,
+  incrementValue: CounterIncrement,
+  // Additional Form fields
+  hasTarget: z.boolean(),
+  hasCustomIncrement: z.boolean(),
+});
