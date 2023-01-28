@@ -1,4 +1,3 @@
-import { deepCloneObject } from "@/utils/functions";
 import { get, writable } from "svelte/store";
 import { ZodError, type z } from "zod";
 
@@ -21,7 +20,7 @@ export function useForm<T extends Object>({
   defaultValues,
   onSubmitCallback,
 }: UseFormProps<T>) {
-  const form = deepCloneObject(defaultValues);
+  const form = structuredClone(defaultValues);
   const refs: RefsState<T> = {};
   let errors = writable<ErrorsState<T>>({});
   const formWithProxy = new Proxy(form, {
@@ -34,7 +33,7 @@ export function useForm<T extends Object>({
   function validateSingleField(
     target: T,
     key: string | symbol,
-    newValue: string | number | boolean
+    newValue: string | number | boolean | Array<string | number | boolean>
   ) {
     const formKey = key as keyof T;
     const fieldHasErrror = get(errors)[formKey];
