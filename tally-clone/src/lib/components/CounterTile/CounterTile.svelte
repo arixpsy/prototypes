@@ -71,7 +71,7 @@
 <div
   class="relative aspect-square flex flex-col justify-center items-center rounded-lg p-2 {counter.color} select-none"
   class:cursor-pointer={!isEditMode}
-  tabIndex={isEditMode ? 0 : 1}
+  tabIndex={isEditMode ? -1 : 0}
   on:click={isEditMode ? undefined : handleClickCounter}
   on:keyup={isEditMode ? undefined : handleKeyPress}
 >
