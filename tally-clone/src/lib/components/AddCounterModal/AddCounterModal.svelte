@@ -139,7 +139,7 @@
       />
     </FormItem>
 
-    <FormItem label="Set a target?">
+    <FormItem label="Set a target?" errorMessage={$errors.target}>
       <div class="flex flex-wrap items-center gap-3">
         <SwitchInput
           bind:isToggle={form.hasTarget}
@@ -153,6 +153,7 @@
               bind:ref={refs.target}
               bind:value={form.target}
               class="flex-1"
+              hasError={!!$errors.target}
             />
           </div>
         {/if}

@@ -43,7 +43,12 @@ export function useForm<T extends Object>({
       if (validateResults.success) {
         errors.set({ ...get(errors), [formKey]: undefined });
       } else {
-        // TODO: check issues if key is still there
+        const errorInputs = validateResults.error.issues.map((issue) =>
+          issue.path[0].toString()
+        );
+        if (!errorInputs.includes(formKey as string)) {
+          errors.set({ ...get(errors), [formKey]: undefined });
+        }
       }
     }
   }
@@ -55,12 +60,14 @@ export function useForm<T extends Object>({
     } catch (e) {
       if (e instanceof ZodError<T>) {
         const errorMap: ErrorsState<T> = {};
+        let firstErrorKey: undefined | keyof T = undefined;
         for (const issue of e.issues) {
           const formInputKey = issue.path[0].toString() as keyof T;
           errorMap[formInputKey] = issue.message;
+          if (!firstErrorKey) firstErrorKey = formInputKey;
         }
         errors.set(errorMap);
-        // TODO: focus first error
+        if (firstErrorKey && refs[firstErrorKey]) refs[firstErrorKey]?.focus();
       } else {
         console.debug(e);
       }
