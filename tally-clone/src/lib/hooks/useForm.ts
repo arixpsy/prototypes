@@ -71,6 +71,7 @@ export function useForm<T extends Object>({
     for (const key in form) {
       form[key] = defaultValues[key];
     }
+    errors.set({});
   };
 
   return {
