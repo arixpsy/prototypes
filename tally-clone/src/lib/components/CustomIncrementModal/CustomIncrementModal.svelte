@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher, tick } from "svelte";
+  import { DateTime } from "luxon";
   import { nanoid } from "nanoid";
+  import type { z } from "zod";
   import { records } from "@/lib/store/records";
   import { labels } from "@/lib/store/labels";
   import {
@@ -8,19 +10,49 @@
     Modal,
     CustomLabelInput,
     FormItem,
+    NumberInput,
+    TextInput,
   } from "@/lib/components";
-  import NumberInput from "@/lib/components/NumberInput/NumberInput.svelte";
-  import TextInput from "@/lib/components/TextInput/TextInput.svelte";
-  import { RecordSchema, type CustomIncrementEvent } from "@/@types/records";
-  import { DateTime } from "luxon";
+  import { RecordFormSchema, type CustomIncrementEvent, type IRecord } from "@/@types/records";
+  import { useForm } from "@/lib/hooks/useForm";
 
   export let customIncrementEvent: CustomIncrementEvent | undefined;
   export let isVisible: boolean;
 
-  let increment: number = 1;
-  let incrementRef: HTMLInputElement;
-  let description: string = "";
-  let recordLabels: Array<string> = [];
+  const {
+    form,
+    refs,
+    errors,
+    onSubmit: handleFormSubmit,
+    resetForm: handleResetForm,
+  } = useForm({
+    schema: RecordFormSchema,
+    defaultValues: {
+      incrementValue: 1,
+      labels: [],
+      description: "",
+    },
+    onSubmitCallback(values: z.infer<typeof RecordFormSchema>) {
+      const counterId = customIncrementEvent?.counterId;
+      if (!counterId) return;
+      const { incrementValue, labels: recordLabels, description } = values;
+      const newRecord: IRecord = {
+        id: nanoid(),
+        counterId,
+        incrementValue,
+        latestValue: counterValue + incrementValue,
+        createdAt: DateTime.now().toSeconds(),
+        labels: recordLabels,
+        description,
+      };
+
+      $labels = [...new Set([...$labels, ...recordLabels])];
+      $records = [newRecord, ...$records];
+
+      dispatch("modal-close");
+      handleResetForm();
+    },
+  });
   const dispatch = createEventDispatcher();
 
   $: counterValue = customIncrementEvent?.latestValue || 0;
@@ -32,36 +64,7 @@
 
   async function focusFirstField() {
     await tick();
-    incrementRef.focus();
-  }
-
-  function handleResetForm() {
-    increment = 1;
-    description = "";
-    recordLabels = [];
-  }
-
-  function handleFormSubmit() {
-    try {
-      const newRecord = RecordSchema.parse({
-        id: nanoid(),
-        counterId: customIncrementEvent?.counterId,
-        incrementValue: increment,
-        latestValue: counterValue + increment,
-        createdAt: DateTime.now().toSeconds(),
-        labels: recordLabels,
-        description,
-      });
-
-      $labels = [...new Set([...$labels, ...recordLabels])];
-      $records = [newRecord, ...$records];
-
-      dispatch("modal-close");
-      handleResetForm();
-    } catch (error) {
-      // TODO: handle error notifs
-      console.table(error);
-    }
+    refs.incrementValue?.focus();
   }
 
   function handleFormCancel() {
@@ -83,25 +86,22 @@
 >
   <p class="text-3xl mb-3 w-72">Add</p>
 
-  <form
-    on:submit|preventDefault={handleFormSubmit}
-    class="flex flex-col space-y-6"
-  >
-    <FormItem label="What amount?">
+  <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col">
+    <FormItem label="What amount?" errorMessage={$errors.incrementValue}>
       <NumberInput
-        bind:value={increment}
-        bind:ref={incrementRef}
-        on:input-submit={handleFormSubmit}
+        bind:value={form.incrementValue}
+        bind:ref={refs.incrementValue}
+        hasError={!!$errors.incrementValue}
       />
     </FormItem>
 
     <FormItem label="Short description:">
-      <TextInput bind:value={description} on:input-submit={handleFormSubmit} />
+      <TextInput bind:value={form.description} />
     </FormItem>
 
     <FormItem label="Labels:">
       <CustomLabelInput
-        bind:value={recordLabels}
+        bind:value={form.labels}
         on:input-submit={handleFormSubmit}
       />
     </FormItem>
@@ -111,8 +111,10 @@
         {counterTitle}
         {counterValue}
         {counterColor}
-        {increment}
+        increment={form.incrementValue}
       />
     </FormItem>
+
+    <input type='submit' hidden />
   </form>
 </Modal>

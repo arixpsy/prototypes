@@ -172,6 +172,6 @@
       </div>
     </FormItem>
 
-    <input type="submit" class="hidden" />
+    <input type="submit" hidden />
   </form>
 </Modal>
