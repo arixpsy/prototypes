@@ -12,8 +12,11 @@
     getCounterTypeLabel,
     getCurrentCount,
   } from "@/lib/components/CounterTile/utils";
+  import { Icon } from "@/lib/components";
+  import { counters } from "@/lib/store/counters";
 
   export let counter: ICounter;
+  export let isEditMode: boolean = false;
 
   $: currentCount = getCurrentCount(counter, $latestRecord);
   $: counterTypeLabel = getCounterTypeLabel(counter);
@@ -59,16 +62,32 @@
 
     $records = [newRecord, ...$records];
   };
+
+  const handleDeleteCounter = function () {
+    $counters = [...$counters.filter((c) => c.id != counter.id)];
+  };
 </script>
 
 <div
-  tabIndex="0"
-  class="aspect-square flex flex-col justify-center items-center rounded-lg p-2 {counter.color} select-none cursor-pointer"
-  transition:scale
-  on:click={handleClickCounter}
-  on:contextmenu|preventDefault={handleClickCounter}
-  on:keyup={handleKeyPress}
+  class="relative aspect-square flex flex-col justify-center items-center rounded-lg p-2 {counter.color} select-none"
+  class:cursor-pointer={!isEditMode}
+  tabIndex={isEditMode ? 0 : 1}
+  on:click={isEditMode ? undefined : handleClickCounter}
+  on:keyup={isEditMode ? undefined : handleKeyPress}
 >
+  <!-- Delete Button -->
+  {#if isEditMode}
+    <div class="absolute -top-2 -right-2" transition:scale>
+      <button
+        class="aspect-square h-8 rounded-full bg-red-400 hover:scale-125 transition-transform text-white flex justify-center items-center border-2 border-white"
+        on:click={handleDeleteCounter}
+      >
+        <Icon.Minus class="h-6 w-6" />
+      </button>
+    </div>
+  {/if}
+
+  <!-- Counter Labels -->
   <p class="text-md text-gray-100 text-center truncate w-full">
     {counter.title}
   </p>
