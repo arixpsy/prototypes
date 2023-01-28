@@ -14,6 +14,7 @@
         isOpen = false;
         dispatch("new-counter");
       },
+      label: "add new counter",
     },
     {
       icon: Icon.Pencil,
@@ -21,6 +22,7 @@
         isOpen = false;
         dispatch("edit-mode");
       },
+      label: "edit counters",
     },
     {
       icon: Icon.Calendar,
@@ -28,6 +30,7 @@
         isOpen = false;
         dispatch("view-history");
       },
+      label: "view history",
     },
   ];
 
@@ -50,6 +53,7 @@
         on:click={item.onClick}
         bind:this={itemRefs[index]}
         class="aspect-square w-14 rounded-full flex justify-center items-center transition-colors bg-gray-400 hover:bg-gray-500 text-white shadow-lg"
+        aria-label={item.label}
       >
         <svelte:component this={item.icon} class="h-8 w-8" />
       </button>
@@ -58,6 +62,7 @@
 
   <button
     on:click={() => (isOpen = !isOpen)}
+    aria-label="navigation menu"
     class="aspect-square w-14 rounded-full flex justify-center items-center transition-colors bg-gray-400 hover:bg-gray-500 text-white shadow-lg"
   >
     {#if isOpen}

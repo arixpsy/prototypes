@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Icon } from "@/lib/components";
-  import Cross from "@/lib/components/Icons/Cross.svelte";
 
   export let label: string = "";
   export let onClose: () => void;
