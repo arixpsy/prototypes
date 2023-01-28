@@ -47,11 +47,11 @@ export const COUNTER_COLOR = [
 
 export type ICounterColor = typeof COUNTER_COLOR[number];
 
-const CounterTitle = z.string().min(1).max(15);
+const CounterTitle = z.string().min(1, 'Cannot be empty').max(15, 'Too Long');
 const CounterResetType = z.nativeEnum(RESET_TYPE)
-const CounterTarget = z.number().min(0)
+const CounterTarget = z.number().min(0, 'Invalid target')
 const CounterColor = z.enum(COUNTER_COLOR)
-const CounterIncrement = z.number().min(0)
+const CounterIncrement = z.number().min(0, 'Invalid increment')
 
 export const CounterSchema = z.object({
   id: z.string(),
