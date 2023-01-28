@@ -1,5 +1,6 @@
 import { DateTime, type DateTimeUnit } from "luxon";
-import type { ICounter, IRecord } from "@/utils/types";
+import type { ICounter } from "@/@types/counters";
+import type { IRecord } from "@/@types/records";
 
 export const getCurrentCount = (
   counter: ICounter,
