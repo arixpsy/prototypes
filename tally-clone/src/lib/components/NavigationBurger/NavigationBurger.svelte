@@ -63,8 +63,12 @@
   <button
     on:click={() => (isOpen = !isOpen)}
     aria-label="navigation menu"
-    class="aspect-square w-14 rounded-full flex justify-center items-center transition-colors bg-gray-400 hover:bg-gray-500 text-white shadow-lg"
-  >
+    class="aspect-square w-14 rounded-full flex justify-center items-center transition-colors text-white shadow-lg"
+      class:bg-gray-400={!isOpen}
+      class:hover:bg-gray-500={!isOpen}
+      class:bg-red-400={isOpen}
+      class:hover:bg-red-500={isOpen}
+    >
     {#if isOpen}
       <div in:fade>
         <Icon.Cross class="h-8 w-8" />

@@ -21,6 +21,6 @@
 
 <style>
   .has-error {
-    @apply border-red-500;
+    @apply border-red-400;
   }
 </style>

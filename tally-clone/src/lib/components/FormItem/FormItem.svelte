@@ -10,7 +10,7 @@
     {label}
   </p>
   <slot />
-  <div class="text-xs text-red-500 my-2 h-4">
+  <div class="text-xs text-red-400 my-2 h-4">
     {#if errorMessage}<p transition:fade>{errorMessage}</p>{/if}
   </div>
 </div>
