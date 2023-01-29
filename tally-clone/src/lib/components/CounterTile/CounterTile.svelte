@@ -64,7 +64,8 @@
   };
 
   const handleDeleteCounter = function () {
-    $counters = [...$counters.filter((c) => c.id != counter.id)];
+    $counters = [...$counters.filter((c) => c.id !== counter.id)];
+    $records = [...$records.filter((r) => r.counterId !== counter.id)]
   };
 </script>
 

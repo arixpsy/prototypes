@@ -11,6 +11,8 @@
   import { KEY_EVENT } from "@/@types/commons";
   import type { CustomIncrementEvent } from "@/@types/records";
 
+  // TODO: history page, edit counter, individual counter state, drag sort counter
+
   let scrollY: number;
   let isEditMode: boolean = false;
   let isMenuOpen: boolean = false;
@@ -19,12 +21,40 @@
   let customIncrementEvent: CustomIncrementEvent | undefined = undefined;
 
   function handleGlobalKeyUp(e: KeyboardEvent) {
-    // TODO: rewrite global key up logic
-    if (isAddModalOpen) return;
-    if (isCustomIncrementModalOpen) return;
+    if (isAddModalOpen) {
+      if (e.keyCode === KEY_EVENT.ESC) {
+        toggleAddModalOpen();
+        return;
+      }
+      return;
+    }
+    if (isCustomIncrementModalOpen) {
+      if (e.keyCode === KEY_EVENT.ESC) {
+        toggleCustomIncrementModalOpen();
+        return;
+      }
+      return;
+    }
+    if (isEditMode) {
+      if (e.keyCode === KEY_EVENT.ESC) {
+        isEditMode = false;
+        return;
+      }
+      return;
+    }
+    if (isMenuOpen) {
+      if (e.keyCode === KEY_EVENT.ESC) {
+        isMenuOpen = false;
+        return;
+      }
+      return;
+    }
     switch (e.keyCode) {
       case KEY_EVENT.N_KEY:
         toggleAddModalOpen();
+        return;
+      case KEY_EVENT.E_KEY:
+        isEditMode = true;
         return;
     }
   }
