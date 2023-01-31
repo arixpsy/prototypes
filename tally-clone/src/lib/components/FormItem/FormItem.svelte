@@ -6,11 +6,11 @@
 </script>
 
 <div class="flex flex-col">
-  <p class="text-sm mb-3 text-gray-500">
+  <p class="mb-3 text-sm text-gray-500">
     {label}
   </p>
   <slot />
-  <div class="text-xs text-red-400 my-2 h-4">
+  <div class="my-2 h-4 text-xs text-red-400">
     {#if errorMessage}<p transition:fade>{errorMessage}</p>{/if}
   </div>
 </div>

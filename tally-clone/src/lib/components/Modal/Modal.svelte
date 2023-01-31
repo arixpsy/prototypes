@@ -31,25 +31,25 @@
 <Portal target="body">
   {#if isVisible}
     <div
-      class="fixed inset-0 flex justify-center items-center z-20"
+      class="fixed inset-0 z-20 flex items-center justify-center"
       on:keyup={handleKeyUp}
       transition:fade
     >
       <div
-        class="absolute bg-black opacity-50 h-full w-full"
+        class="absolute h-full w-full bg-black opacity-50"
         on:click={handleClose}
         on:keypress={() => {}}
       />
       <div
-        class={`absolute flex flex-col bg-white h-full max-h-full sm:h-fit w-full sm:w-fit sm:rounded-lg`}
+        class={`absolute flex h-full max-h-full w-full flex-col bg-white sm:h-fit sm:w-fit sm:rounded-lg`}
       >
         <!-- Content -->
-        <div class="p-6 h-full overflow-auto">
+        <div class="h-full overflow-auto p-6">
           <slot />
         </div>
 
         <!-- Footer -->
-        <div class="p-6 flex space-x-6 h-24">
+        <div class="flex h-24 space-x-6 p-6">
           <Button text={cancelText} on:click={handleCancel} block />
           <Button
             text={confirmText}

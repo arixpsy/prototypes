@@ -65,12 +65,12 @@
 
   const handleDeleteCounter = function () {
     $counters = [...$counters.filter((c) => c.id !== counter.id)];
-    $records = [...$records.filter((r) => r.counterId !== counter.id)]
+    $records = [...$records.filter((r) => r.counterId !== counter.id)];
   };
 </script>
 
 <div
-  class="relative aspect-square flex flex-col justify-center items-center rounded-lg p-2 {counter.color} select-none"
+  class="relative flex aspect-square flex-col items-center justify-center rounded-lg p-2 {counter.color} select-none"
   class:cursor-pointer={!isEditMode}
   class:cursor-grab={isEditMode}
   tabIndex={isEditMode ? -1 : 0}
@@ -81,7 +81,7 @@
   {#if isEditMode}
     <div class="absolute -top-2 -right-2" transition:scale>
       <button
-        class="aspect-square h-8 rounded-full bg-red-400 hover:scale-125 transition-transform text-white flex justify-center items-center border-2 border-white"
+        class="flex aspect-square h-8 items-center justify-center rounded-full border-2 border-white bg-red-400 text-white transition-transform hover:scale-125"
         on:click={handleDeleteCounter}
       >
         <Icon.Minus class="h-6 w-6" />
@@ -90,12 +90,12 @@
   {/if}
 
   <!-- Counter Labels -->
-  <p class="text-md text-gray-100 text-center truncate w-full">
+  <p class="text-md w-full truncate text-center text-gray-100">
     {counter.title}
   </p>
-  <p class="text-xs text-center w-full">{counterTypeLabel}</p>
+  <p class="w-full text-center text-xs">{counterTypeLabel}</p>
   {#key currentCount}
-    <p class="text-3xl text-center font-bold my-3 w-full" in:scale>
+    <p class="my-3 w-full text-center text-3xl font-bold" in:scale>
       {#if counter.target}
         {currentCount}/{counter.target}
       {:else}

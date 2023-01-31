@@ -68,7 +68,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
-  class="flex flex-wrap gap-2 w-full py-1.5 px-2.5 text-sm rounded-lg border-2 border-gray-50 bg-gray-50 text-gray-900  focus-within:border-blue-700 outline-none transition-colors  cursor-text"
+  class="flex w-full cursor-text flex-wrap gap-2 rounded-lg border-2 border-gray-50 bg-gray-50 py-1.5 px-2.5 text-sm  text-gray-900 outline-none transition-colors  focus-within:border-blue-700"
   on:click={focusInput}
 >
   {#each value as label (label)}
@@ -79,33 +79,33 @@
     bind:value={inputValue}
     bind:this={inputRef}
     size="5"
-    class="bg-inherit outline-none w-full flex-1 min-w-fit py-1"
+    class="w-full min-w-fit flex-1 bg-inherit py-1 outline-none"
     on:keyup={handleKeyUp}
   />
 </div>
 <div class="relative">
   {#if inputValue.trim().length > 0}
     <div
-      class="absolute top-1 left-0 right-0 bg-gray-50 shadow-lg rounded-lg max-h-44 text-gray-900 text-sm overflow-y-auto"
+      class="absolute top-1 left-0 right-0 max-h-44 overflow-y-auto rounded-lg bg-gray-50 text-sm text-gray-900 shadow-lg"
       transition:fade
     >
-      <div class="text-xs px-2.5 text-gray-400 mt-3">New label:</div>
+      <div class="mt-3 px-2.5 text-xs text-gray-400">New label:</div>
       <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
       <div
         tabindex="0"
-        class="p-2.5 hover:bg-blue-100 cursor-pointer transition-colors"
+        class="cursor-pointer p-2.5 transition-colors hover:bg-blue-100"
         on:click={() => handleAddLabel()}
         on:keyup={handleOptionKeyUp()}
       >
         {inputValue}
       </div>
       <hr />
-      <div class="text-xs px-2.5 text-gray-400 mt-3">Previously used:</div>
+      <div class="mt-3 px-2.5 text-xs text-gray-400">Previously used:</div>
       {#each $filterLabels as label (label)}
         <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <div
           tabindex="0"
-          class="flex p-2.5 hover:bg-blue-100 cursor-pointer transition-colors"
+          class="flex cursor-pointer p-2.5 transition-colors hover:bg-blue-100"
           on:click={() => handleAddLabel(label)}
           on:keyup={handleOptionKeyUp(label)}
         >

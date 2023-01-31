@@ -45,13 +45,13 @@ export const COUNTER_COLOR = [
   "bg-rose-400",
 ] as const;
 
-export type ICounterColor = typeof COUNTER_COLOR[number];
+export type ICounterColor = (typeof COUNTER_COLOR)[number];
 
-const CounterTitle = z.string().min(1, 'Cannot be empty').max(15, 'Too Long');
-const CounterResetType = z.nativeEnum(RESET_TYPE)
-const CounterTarget = z.number().min(0, 'Targets should be 0 or more')
-const CounterColor = z.enum(COUNTER_COLOR)
-const CounterIncrement = z.number().min(0, 'Increments should be 0 or more')
+const CounterTitle = z.string().min(1, "Cannot be empty").max(15, "Too Long");
+const CounterResetType = z.nativeEnum(RESET_TYPE);
+const CounterTarget = z.number().min(0, "Targets should be 0 or more");
+const CounterColor = z.enum(COUNTER_COLOR);
+const CounterIncrement = z.number().min(0, "Increments should be 0 or more");
 
 export const CounterSchema = z.object({
   id: z.string(),

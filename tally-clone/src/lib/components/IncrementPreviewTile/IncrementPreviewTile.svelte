@@ -8,12 +8,12 @@
 </script>
 
 <div
-  class="aspect-square flex flex-col justify-center items-center self-center rounded-lg p-2 {counterColor} w-full max-w-xs"
+  class="flex aspect-square flex-col items-center justify-center self-center rounded-lg p-2 {counterColor} w-full max-w-xs"
 >
-  <p class="text-3xl text-gray-100 text-center truncate w-full">
+  <p class="w-full truncate text-center text-3xl text-gray-100">
     {counterTitle}
   </p>
-  <p class="flex items-center space-x-3 justify-center text-3xl font-bold my-3">
+  <p class="my-3 flex items-center justify-center space-x-3 text-3xl font-bold">
     <span class="line-through">{counterValue}</span>
     <Icon.ChevronRight />
     <span>{counterValue + increment}</span>

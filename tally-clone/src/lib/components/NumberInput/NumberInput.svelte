@@ -19,7 +19,7 @@
   bind:this={ref}
   class={inputClasses}
   class:has-error={hasError}
-  step='0.01'
+  step="0.01"
 />
 
 <style>

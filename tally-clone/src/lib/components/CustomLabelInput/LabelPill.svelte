@@ -6,12 +6,12 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="flex gap-1 pl-3 pr-1 py-1 rounded-full items-center bg-gray-300">
+<div class="flex items-center gap-1 rounded-full bg-gray-300 py-1 pl-3 pr-1">
   <span>{label}</span>
   <span
-    class="inline-block cursor-pointer p-1 rounded-full transition-colors hover:bg-gray-100"
+    class="inline-block cursor-pointer rounded-full p-1 transition-colors hover:bg-gray-100"
     on:click={onClose}
   >
-    <Icon.Cross class="w-3 h-3" />
+    <Icon.Cross class="h-3 w-3" />
   </span>
 </div>

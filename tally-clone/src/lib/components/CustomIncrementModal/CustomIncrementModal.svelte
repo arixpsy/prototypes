@@ -13,7 +13,11 @@
     NumberInput,
     TextInput,
   } from "@/lib/components";
-  import { RecordFormSchema, type CustomIncrementEvent, type IRecord } from "@/@types/records";
+  import {
+    RecordFormSchema,
+    type CustomIncrementEvent,
+    type IRecord,
+  } from "@/@types/records";
   import { useForm } from "@/lib/hooks/useForm";
 
   export let customIncrementEvent: CustomIncrementEvent | undefined;
@@ -84,7 +88,7 @@
   on:modal-cancel={handleFormCancel}
   on:modal-close={handleFormClose}
 >
-  <p class="text-3xl mb-3 w-72">Add</p>
+  <p class="mb-3 w-72 text-3xl">Add</p>
 
   <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col">
     <FormItem label="What amount?" errorMessage={$errors.incrementValue}>
@@ -115,6 +119,6 @@
       />
     </FormItem>
 
-    <input type='submit' hidden />
+    <input type="submit" hidden />
   </form>
 </Modal>

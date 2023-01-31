@@ -106,7 +106,7 @@
   on:modal-cancel={handleFormCancel}
   on:modal-close={handleFormClose}
 >
-  <p class="text-3xl mb-3">Create</p>
+  <p class="mb-3 text-3xl">Create</p>
 
   <form on:submit|preventDefault={handleFormSubmit} class="flex flex-col">
     <FormItem label="What are you counting?" errorMessage={$errors.title}>
@@ -118,7 +118,7 @@
     </FormItem>
 
     <FormItem label="Resets every:">
-      <div class="flex gap-3 flex-wrap">
+      <div class="flex flex-wrap gap-3">
         {#each resetTypeValues as [resetKey, resetType] (resetKey)}
           <RadioInput
             name="reset_type"
@@ -147,8 +147,8 @@
         />
 
         {#if form.hasTarget}
-          <div class="flex items-center flex-wrap flex-1 gap-3" transition:fade>
-            <p class="text-sm text-gray-500 flex-none">Target:</p>
+          <div class="flex flex-1 flex-wrap items-center gap-3" transition:fade>
+            <p class="flex-none text-sm text-gray-500">Target:</p>
             <NumberInput
               bind:ref={refs.target}
               bind:value={form.target}
@@ -161,7 +161,7 @@
     </FormItem>
 
     <FormItem label="Pick a color:">
-      <div class="flex flex-wrap gap-3 max-w-xl">
+      <div class="flex max-w-xl flex-wrap gap-3">
         {#each COUNTER_COLOR as counterColor, i (i)}
           <ColorRadioInput
             bind:group={form.color}

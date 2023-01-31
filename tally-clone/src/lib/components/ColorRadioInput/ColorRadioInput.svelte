@@ -24,12 +24,12 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <label
   tabindex="0"
-  class={`h-8 w-8 rounded-full ${value} flex justify-center items-center cursor-pointer`}
+  class={`h-8 w-8 rounded-full ${value} flex cursor-pointer items-center justify-center`}
   class:onSelected={isSelected}
   on:keyup={handleKeyUp}
 >
   <div
-    class="bg-white rounded-full transition-all"
+    class="rounded-full bg-white transition-all"
     class:h-0={!isSelected}
     class:w-0={!isSelected}
     class:h-5={isSelected}

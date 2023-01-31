@@ -41,7 +41,7 @@
 <div>
   <div class="flex w-full text-center text-sm">
     <div
-      class="w-full p-1.5 text-gray-400 rounded-tl-full rounded-bl-full transition-colors select-none touch-none"
+      class="w-full touch-none select-none rounded-tl-full rounded-bl-full p-1.5 text-gray-400 transition-colors"
       class:cursor-pointer={isCustom}
       class:bg-gray-200={isCustom}
       class:hover:bg-gray-300={isCustom}
@@ -54,7 +54,7 @@
       Fixed
     </div>
     <div
-      class="w-full p-1.5 text-gray-400 rounded-tr-full rounded-br-full transition-colors select-none touch-none"
+      class="w-full touch-none select-none rounded-tr-full rounded-br-full p-1.5 text-gray-400 transition-colors"
       class:cursor-pointer={!isCustom}
       class:bg-gray-200={!isCustom}
       class:hover:bg-gray-300={!isCustom}
@@ -71,10 +71,10 @@
   {#if !isCustom}
     <div
       transition:slide|local={{ duration: 500 }}
-      class="flex justify-center items-center gap-6 mt-6"
+      class="mt-6 flex items-center justify-center gap-6"
     >
       <button
-        class="flex justify-center items-center rounded-full h-14 w-14 bg-gray-200 hover:bg-gray-300 transition-colors"
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-200 transition-colors hover:bg-gray-300"
         on:click|preventDefault={handleDecrementCounter}
         transition:fade
         type="button"
@@ -82,10 +82,10 @@
         <Icon.Minus />
       </button>
 
-      <p class="text-2xl w-16 text-center" transition:fade>{value}</p>
+      <p class="w-16 text-center text-2xl" transition:fade>{value}</p>
 
       <button
-        class="flex justify-center items-center rounded-full h-14 w-14 bg-gray-200 hover:bg-gray-300 transition-colors"
+        class="flex h-14 w-14 items-center justify-center rounded-full bg-gray-200 transition-colors hover:bg-gray-300"
         on:click|preventDefault={handleIncrementCounter}
         transition:fade
         type="button"

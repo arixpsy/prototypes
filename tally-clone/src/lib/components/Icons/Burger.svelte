@@ -1,7 +1,7 @@
 <script lang="ts">
   export { forwardClasses as class };
 
-  let forwardClasses: string = 'h-6 w-6';
+  let forwardClasses: string = "h-6 w-6";
 </script>
 
 <svg

@@ -21,14 +21,14 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
   tabindex="0"
-  class="relative h-9 w-16 p-1 my-1 rounded-full transition-colors cursor-pointer select-none"
+  class="relative my-1 h-9 w-16 cursor-pointer select-none rounded-full p-1 transition-colors"
   class:bg-gray-200={!isToggle}
   class:bg-blue-700={isToggle}
   on:click={() => (isToggle = !isToggle)}
   on:keyup={handleKeyUp}
 >
   <div
-    class="absolute flex justify-center h-7 w-7 rounded-full transition-transform bg-white"
+    class="absolute flex h-7 w-7 justify-center rounded-full bg-white transition-transform"
     class:translate-x-7={isToggle}
   />
 </div>
