@@ -19,7 +19,7 @@ import Cross from "@/lib/components/Icons/Cross.svelte";
 import Minus from "@/lib/components/Icons/Minus.svelte";
 import Plus from "@/lib/components/Icons/Plus.svelte";
 import ChevronRight from "@/lib/components/Icons/ChevronRight.svelte";
-import Pencil from "@/lib/components/Icons/Pencil.svelte";
+import Archive from "@/lib/components/Icons/Archive.svelte";
 import Calendar from "@/lib/components/Icons/Calendar.svelte";
 
 const Icon = {
@@ -29,7 +29,7 @@ const Icon = {
   Minus,
   ChevronRight,
   Calendar,
-  Pencil,
+  Archive,
 };
 
 export {

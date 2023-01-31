@@ -18,7 +18,7 @@
       label: "add new counter",
     },
     {
-      icon: Icon.Pencil,
+      icon: Icon.Archive,
       onClick: () => {
         isMenuOpen = false;
         isEditMode = true;
