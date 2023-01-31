@@ -90,7 +90,7 @@
   <div class="container mx-auto h-screen pt-9">
     <!-- HEADER -->
     <h1
-      class="text-4xl text-center py-3 bg-white sticky top-0 z-10"
+      class="sticky top-0 z-10 bg-white py-3  text-center text-4xl"
       class:shadow-lg={scrollY > 36}
     >
       {#if isEditMode}
