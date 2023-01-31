@@ -1,7 +1,6 @@
 <script lang="ts">
   import { fade, scale } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import { dndzone } from "svelte-dnd-action";
   import {
     CounterTile,
     AddCounterModal,
@@ -75,13 +74,6 @@
     customIncrementEvent = e.detail;
     isCustomIncrementModalOpen = true;
   }
-
-  function handleDndConsider(e: CustomEvent) {
-    $counters = e.detail.items;
-  }
-  function handleDndFinalize(e: CustomEvent) {
-    $counters = e.detail.items;
-  }
 </script>
 
 <svelte:window on:keyup={handleGlobalKeyUp} bind:scrollY />
@@ -102,13 +94,10 @@
 
     <!-- COUNTER TILES -->
     <div
-      use:dndzone={{ items: $counters, flipDurationMs: 500 }}
-      on:consider={handleDndConsider}
-      on:finalize={handleDndFinalize}
       class="grid grid-cols-2 gap-3 p-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
     >
       {#each $counters as counter (counter.id)}
-        <div animate:flip={{ duration: 500 }}>
+        <div animate:flip={{ duration: 500 }} in:scale out:scale>
           <CounterTile
             {counter}
             {isEditMode}
