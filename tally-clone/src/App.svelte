@@ -86,7 +86,7 @@
       class:shadow-lg={scrollY > 36}
     >
       {#if isEditMode}
-        <p in:fade>Delete Mode</p>
+        <p in:fade>Edit Mode</p>
       {:else}
         <p in:fade>WAICH</p>
       {/if}
