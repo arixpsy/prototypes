@@ -21,6 +21,7 @@ import Plus from "@/lib/components/Icons/Plus.svelte";
 import ChevronRight from "@/lib/components/Icons/ChevronRight.svelte";
 import FourSquare from "@/lib/components/Icons/FourSquare.svelte";
 import Calendar from "@/lib/components/Icons/Calendar.svelte";
+import Home from "@/lib/components/Icons/Home.svelte";
 
 const Icon = {
   Burger,
@@ -30,6 +31,7 @@ const Icon = {
   ChevronRight,
   Calendar,
   FourSquare,
+  Home,
 };
 
 export {
