@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher, tick } from "svelte";
+  import { navigateTo } from 'svelte-router-spa'
   import { fade, fly } from "svelte/transition";
   import { Icon } from "@/lib/components";
 
@@ -29,7 +30,7 @@
       icon: Icon.Calendar,
       onClick: () => {
         isMenuOpen = false;
-        dispatch("view-history");
+        navigateTo('history')
       },
       label: "view history",
     },
