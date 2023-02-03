@@ -87,7 +87,7 @@
 <svelte:window on:keyup={handleGlobalKeyUp} bind:scrollY />
 
 <main class="min-h-screen bg-white">
-  <div class="container mx-auto h-screen pt-9">
+  <div class="container mx-auto min-h-screen pt-9">
     <!-- HEADER -->
     <h1
       class="sticky top-0 z-10 bg-white py-3  text-center text-4xl"
