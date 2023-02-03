@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fade, scale } from "svelte/transition";
   import { flip } from "svelte/animate";
+  import { dndzone } from "svelte-dnd-action";
   import {
     CounterTile,
     AddCounterModal,
@@ -14,7 +15,7 @@
   // TODO: history page, edit counter, individual counter state, drag sort counter
 
   let scrollY: number;
-  let isEditMode: boolean = false;
+  let isSortMode: boolean = false;
   let isMenuOpen: boolean = false;
   let isAddModalOpen = false;
   let isCustomIncrementModalOpen = false;
@@ -35,9 +36,9 @@
       }
       return;
     }
-    if (isEditMode) {
+    if (isSortMode) {
       if (e.keyCode === KEY_EVENT.ESC) {
-        isEditMode = false;
+        isSortMode = false;
         return;
       }
       return;
@@ -54,7 +55,7 @@
         toggleAddModalOpen();
         return;
       case KEY_EVENT.E_KEY:
-        isEditMode = true;
+        isSortMode = true;
         return;
     }
   }
@@ -74,6 +75,13 @@
     customIncrementEvent = e.detail;
     isCustomIncrementModalOpen = true;
   }
+
+  function handleDndConsider(e: CustomEvent) {
+    $counters = e.detail.items;
+  }
+  function handleDndFinalize(e: CustomEvent) {
+    $counters = e.detail.items;
+  }
 </script>
 
 <svelte:window on:keyup={handleGlobalKeyUp} bind:scrollY />
@@ -85,8 +93,8 @@
       class="sticky top-0 z-10 bg-white py-3  text-center text-4xl"
       class:shadow-lg={scrollY > 36}
     >
-      {#if isEditMode}
-        <p in:fade>Edit Mode</p>
+      {#if isSortMode}
+        <p in:fade>Sort Mode</p>
       {:else}
         <p in:fade>WAICH</p>
       {/if}
@@ -94,13 +102,23 @@
 
     <!-- COUNTER TILES -->
     <div
-      class="grid grid-cols-2 gap-3 p-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
+      use:dndzone={{
+        items: $counters,
+        flipDurationMs: 400,
+        dragDisabled: !isSortMode,
+        dropTargetStyle: {},
+        centreDraggedOnCursor: true,
+      }}
+      on:consider={handleDndConsider}
+      on:finalize={handleDndFinalize}
+      class="grid auto-rows-min grid-cols-2 gap-3 p-3 outline-none sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
+      style="height: calc(100% - 100px);"
     >
       {#each $counters as counter (counter.id)}
-        <div animate:flip={{ duration: 500 }} in:scale out:scale>
+        <div animate:flip={{ duration: 400 }} in:scale>
           <CounterTile
             {counter}
-            {isEditMode}
+            {isSortMode}
             on:custom-increment={handleCustomIncrement}
           />
         </div>
@@ -111,7 +129,7 @@
   <!-- NAVIGATION MENU -->
   <NavigationBurger
     bind:isMenuOpen
-    bind:isEditMode
+    bind:isSortMode
     on:new-counter={toggleAddModalOpen}
     on:view-history={() => {}}
   />

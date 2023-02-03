@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "luxon": "^3.2.1",
+    "svelte-dnd-action": "^0.9.22",
     "svelte-portal": "^2.2.0",
     "zod": "^3.20.2"
   }

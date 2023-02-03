@@ -4,7 +4,7 @@
   import { Icon } from "@/lib/components";
 
   export let isMenuOpen: boolean = false;
-  export let isEditMode: boolean = false;
+  export let isSortMode: boolean = false;
 
   const navButtonRefs: Array<HTMLButtonElement> = [];
   const dispatch = createEventDispatcher();
@@ -18,12 +18,12 @@
       label: "add new counter",
     },
     {
-      icon: Icon.Pencil,
+      icon: Icon.FourSquare,
       onClick: () => {
         isMenuOpen = false;
-        isEditMode = true;
+        isSortMode = true;
       },
-      label: "edit counters",
+      label: "sort counters",
     },
     {
       icon: Icon.Calendar,
@@ -63,10 +63,10 @@
   {/if}
 
   <!-- Navigation Menu Button -->
-  {#if isEditMode}
+  {#if isSortMode}
     <button
-      on:click={() => (isEditMode = false)}
-      aria-label="exit edit mode"
+      on:click={() => (isSortMode = false)}
+      aria-label="exit sort mode"
       class="nav-button bg-red-400 hover:bg-red-500"
     >
       <Icon.Cross class="h-8 w-8" />

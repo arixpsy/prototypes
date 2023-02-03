@@ -16,7 +16,7 @@
   import { counters } from "@/lib/store/counters";
 
   export let counter: ICounter;
-  export let isEditMode: boolean = false;
+  export let isSortMode: boolean = false;
 
   $: currentCount = getCurrentCount(counter, $latestRecord);
   $: counterTypeLabel = getCounterTypeLabel(counter);
@@ -71,15 +71,15 @@
 
 <div
   class="relative flex aspect-square flex-col items-center justify-center rounded-lg p-2 {counter.color} select-none"
-  class:cursor-pointer={!isEditMode}
-  class:cursor-grab={isEditMode}
-  tabIndex={isEditMode ? -1 : 0}
-  on:click={isEditMode ? undefined : handleClickCounter}
-  on:keyup={isEditMode ? undefined : handleKeyPress}
+  class:cursor-pointer={!isSortMode}
+  class:cursor-grab={isSortMode}
+  tabIndex={isSortMode ? -1 : 0}
+  on:click={isSortMode ? undefined : handleClickCounter}
+  on:keyup={isSortMode ? undefined : handleKeyPress}
 >
   <!-- Delete Button -->
-  {#if isEditMode}
-    <div class="absolute -top-2 -right-2" transition:scale>
+  {#if isSortMode}
+    <div class="absolute -top-2 -right-2" in:scale>
       <button
         class="flex aspect-square h-8 items-center justify-center rounded-full border-2 border-white bg-red-400 text-white transition-transform hover:scale-125"
         on:click={handleDeleteCounter}
@@ -95,7 +95,7 @@
   </p>
   <p class="w-full text-center text-xs">{counterTypeLabel}</p>
   {#key currentCount}
-    <p class="my-3 w-full text-center text-3xl font-bold" in:scale>
+    <p class="my-3 w-full text-center text-3xl font-bold" in:scale|local>
       {#if counter.target}
         {currentCount}/{counter.target}
       {:else}
