@@ -17,7 +17,7 @@
     </h1>
 
     <div
-      class="mx-auto mb-24 grid max-w-lg grid-cols-[auto_1fr] gap-x-3 gap-y-6 p-3"
+      class="mx-auto mb-24 grid w-full max-w-lg grid-cols-[auto_1fr] gap-x-3 gap-y-6 overflow-x-hidden p-3"
     >
       {#each $records as record, index (record.id)}
         <HistoryRecord {record} {index} />
