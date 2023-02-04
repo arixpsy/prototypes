@@ -21,9 +21,9 @@
   </h2>
 {/if}
 
-<p class="text-sm font-bold">{recordDate.toFormat("h:mm a")}</p>
+<p class="text-sm font-bold whitespace-nowrap">{recordDate.toFormat("h:mm a")}</p>
 <div class="space-y-3">
-  <div class="w-max rounded-md {counter?.color} px-2 py-0.5 text-sm text-white">
+  <div class="w-max whitespace-nowrap rounded-md {counter?.color} px-2 py-0.5 text-sm text-white">
     +{record.incrementValue}
     {counter?.title}
   </div>
