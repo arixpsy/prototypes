@@ -12,7 +12,7 @@
   import { KEY_EVENT } from "@/@types/commons";
   import type { CustomIncrementEvent } from "@/@types/records";
 
-  // TODO: history page, edit counter, individual counter state
+  // TODO: edit counter, individual counter state
 
   let scrollY: number;
   let isSortMode: boolean = false;
