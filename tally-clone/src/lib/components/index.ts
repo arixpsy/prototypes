@@ -13,6 +13,7 @@ import CustomIncrementModal from "@/lib/components/CustomIncrementModal/CustomIn
 import CustomLabelInput from "@/lib/components/CustomLabelInput/CustomLabelInput.svelte";
 import NavigationBurger from "@/lib/components/NavigationBurger/NavigationBurger.svelte";
 import FormItem from "@/lib/components/FormItem/FormItem.svelte";
+import HistoryRecord from "@/lib/components/HistoryRecord/HistoryRecord.svelte";
 
 import Burger from "@/lib/components/Icons/Burger.svelte";
 import Cross from "@/lib/components/Icons/Cross.svelte";
@@ -51,4 +52,5 @@ export {
   NavigationBurger,
   Icon,
   FormItem,
+  HistoryRecord,
 };

@@ -3,6 +3,7 @@
   import { navigateTo } from "svelte-router-spa";
   import { fade } from "svelte/transition";
   import { records } from "@/lib/store/records";
+  import { HistoryRecord } from "@/lib/components";
 </script>
 
 <main class="min-h-screen bg-white">
@@ -15,25 +16,11 @@
       History
     </h1>
 
-    <div class="mx-auto grid max-w-lg grid-cols-[auto_1fr] gap-x-8 gap-y-3 p-3 mb-24">
-      {#each $records as record (record.id)}
-        <h2 class="col-span-2 text-lg text-gray-400">TODAY</h2>
-        <p class="text-sm font-bold">8:23 AM</p>
-        <div class="space-y-3">
-          <div
-            class="w-max rounded-md bg-red-200 px-2 py-0.5 text-sm text-white"
-          >
-            + 25 Spendings
-          </div>
-          <div class="text-sm">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores
-            possimus illum exercitationem expedita!
-          </div>
-          <div class="text-sm">
-            <span>LOL</span>
-            <span>COOL</span>
-          </div>
-        </div>
+    <div
+      class="mx-auto mb-24 grid max-w-lg grid-cols-[auto_1fr] gap-x-3 gap-y-6 p-3"
+    >
+      {#each $records as record, index (record.id)}
+        <HistoryRecord {record} prevIndex={index - 1} />
       {/each}
     </div>
 
