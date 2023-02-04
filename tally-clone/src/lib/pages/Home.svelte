@@ -2,6 +2,7 @@
   import { fade, scale } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { dndzone } from "svelte-dnd-action";
+  import { navigateTo } from "svelte-router-spa";
   import {
     CounterTile,
     AddCounterModal,
@@ -56,6 +57,9 @@
         return;
       case KEY_EVENT.E_KEY:
         isSortMode = true;
+        return;
+      case KEY_EVENT.H_KEY:
+        navigateTo("history");
         return;
     }
   }

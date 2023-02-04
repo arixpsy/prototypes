@@ -41,7 +41,7 @@
   {#if record.labels.length}
     <div class="flex flex-wrap gap-1 text-sm">
       {#each record.labels as label (label)}
-        <span class="rounded-full bg-gray-300 py-1 px-3">{label}</span>
+        <span class="rounded-full border-2 border-gray-300 text-gray-400 py-0.5 px-3">{label}</span>
       {/each}
     </div>
   {/if}

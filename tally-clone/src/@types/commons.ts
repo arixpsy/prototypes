@@ -6,6 +6,7 @@ export const KEY_EVENT = {
   SPACE: 32,
   N_KEY: 78,
   E_KEY: 69,
+  H_KEY: 72,
 } as const;
 
 export type IKeyEvent = ObjectValues<typeof KEY_EVENT>;
