@@ -20,7 +20,7 @@
       class="mx-auto mb-24 grid max-w-lg grid-cols-[auto_1fr] gap-x-3 gap-y-6 p-3"
     >
       {#each $records as record, index (record.id)}
-        <HistoryRecord {record} prevIndex={index - 1} />
+        <HistoryRecord {record} {index} />
       {/each}
     </div>
 

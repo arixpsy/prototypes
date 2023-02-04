@@ -3,11 +3,12 @@
   import { records } from "@/lib/store/records";
   import { counters } from "@/lib/store/counters";
   import { DateTime } from "luxon";
+  import { fade, fly } from "svelte/transition";
 
   export let record: IRecord;
-  export let prevIndex: number;
+  export let index: number;
 
-  $: prevRecordDate = DateTime.fromSeconds($records[prevIndex]?.createdAt || 0);
+  $: prevRecordDate = DateTime.fromSeconds($records[index - 1]?.createdAt || 0);
   $: recordDate = DateTime.fromSeconds(record.createdAt);
   $: counter = $counters.find((c) => c.id === record.counterId);
   $: isSameDayAsPrevRecord =
@@ -16,14 +17,18 @@
 </script>
 
 {#if !isSameDayAsPrevRecord}
-  <h2 class="col-span-2 mt-6 text-lg text-gray-400 first:mt-0">
+  <h2 class="col-span-2 mt-6 text-lg text-gray-400 first:mt-0" transition:fade>
     {recordDate.toFormat("ccc, d LLL y")}
   </h2>
 {/if}
 
-<p class="text-sm font-bold whitespace-nowrap">{recordDate.toFormat("h:mm a")}</p>
-<div class="space-y-3">
-  <div class="w-max whitespace-nowrap rounded-md {counter?.color} px-2 py-0.5 text-sm text-white">
+<p class="whitespace-nowrap text-sm font-bold" transition:fade>
+  {recordDate.toFormat("h:mm a")}
+</p>
+<div class="space-y-3" in:fly={{ x: 200, delay: index * 50 }} out:fade>
+  <div
+    class="w-max whitespace-nowrap rounded-md {counter?.color} px-2 py-0.5 text-sm text-white"
+  >
     +{record.incrementValue}
     {counter?.title}
   </div>
