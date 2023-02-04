@@ -16,9 +16,10 @@
     $labels.filter((v) => v.includes(inputValue))
   );
 
-  function handleKeyUp(e: KeyboardEvent) {
+  function handleKeyPress(e: KeyboardEvent) {
     switch (e.keyCode) {
       case KEY_EVENT.ENTER:
+        e.preventDefault()
         if (inputValue.trim() === "") {
           dispatch("input-submit");
         } else {
@@ -80,7 +81,7 @@
     bind:this={inputRef}
     size="5"
     class="w-full min-w-fit flex-1 bg-inherit py-1 outline-none"
-    on:keyup={handleKeyUp}
+    on:keypress={handleKeyPress}
   />
 </div>
 <div class="relative">
