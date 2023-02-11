@@ -1,4 +1,5 @@
 import type { ActionReturn } from "svelte/action";
+import { get, writable } from "svelte/store";
 
 type DragParameters = {};
 type DragAttributes = {
@@ -10,6 +11,7 @@ type DragAttributes = {
 export function drag(
   node: HTMLElement
 ): ActionReturn<DragParameters, DragAttributes> {
+  const itemDragging = writable<boolean>(false)
   let x: number;
   let y: number;
 
@@ -22,6 +24,10 @@ export function drag(
       y = event.clientY;
     }
 
+    if (get(itemDragging)) {
+      return
+    }
+    itemDragging.set(true)
     node.dispatchEvent(
       new CustomEvent("dragstart", {
         detail: { x, y },
@@ -62,6 +68,7 @@ export function drag(
     x = 0;
     y = 0;
 
+    itemDragging.set(false)
     node.dispatchEvent(
       new CustomEvent("dragend", {
         detail: { x, y },
