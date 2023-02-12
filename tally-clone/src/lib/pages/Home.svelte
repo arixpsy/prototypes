@@ -112,6 +112,7 @@
         dragDisabled: !isSortMode,
         dropTargetStyle: {},
         centreDraggedOnCursor: true,
+        zoneTabIndex: -1
       }}
       on:consider={handleDndConsider}
       on:finalize={handleDndFinalize}
