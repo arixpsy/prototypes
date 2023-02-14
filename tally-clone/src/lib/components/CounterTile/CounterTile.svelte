@@ -14,6 +14,8 @@
   } from "@/lib/components/CounterTile/utils";
   import { Icon } from "@/lib/components";
   import { counters } from "@/lib/store/counters";
+    import { longpress } from "@/lib/actions/longpress";
+    import { navigateTo } from "svelte-router-spa";
 
   export let counter: ICounter;
   export let isSortMode: boolean = false;
@@ -76,6 +78,8 @@
   tabIndex={isSortMode ? -1 : 0}
   on:click={isSortMode ? undefined : handleClickCounter}
   on:keyup={isSortMode ? undefined : handleKeyPress}
+  use:longpress={{ enabled: !isSortMode }}
+  on:longpress={() => navigateTo(`counter?id=${counter.id}`)}
 >
   <!-- Delete Button -->
   {#if isSortMode}
