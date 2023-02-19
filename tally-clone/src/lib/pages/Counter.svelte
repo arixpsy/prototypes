@@ -6,7 +6,13 @@
   import { DateTime } from "luxon";
   import { derived } from "svelte/store";
   import type { IRecord } from "@/@types/records";
-  import { Icon, CounterBarChart } from "@/lib/components";
+  import {
+    Icon,
+    CounterBarChart,
+    CounterForceChart,
+    HistoryRecord,
+  } from "@/lib/components";
+  import { flip } from "svelte/animate";
 
   export let currentRoute: Route;
   let size = 14;
@@ -54,6 +60,7 @@
     }
     return final;
   });
+  $: selectedData = $chartData[size - 1].data;
 </script>
 
 <main class="min-h-screen bg-white">
@@ -78,9 +85,19 @@
 
     <CounterBarChart data={$chartData} color={counter?.color} />
 
-    <p class="pt-6 text-center">
-      Records: {$chartData.find((d) => d.end === selectedDate)?.data.length}
-    </p>
+    <div class="mx-auto flex w-full max-w-lg flex-col">
+      <p class="px-3 pt-6 text-center text-lg text-gray-400">Records</p>
+
+      <CounterForceChart data={selectedData} />
+
+      <div class="mx-auto mb-24 flex w-full max-w-lg flex-col py-3">
+        {#each selectedData as record, index (record.id)}
+          <div animate:flip={{ duration: 400 }} out:fade>
+            <HistoryRecord {record} {index} />
+          </div>
+        {/each}
+      </div>
+    </div>
 
     <!-- NAVIGATION TO HOME-->
     <div class="fixed bottom-6 right-6 z-30 space-y-6">
