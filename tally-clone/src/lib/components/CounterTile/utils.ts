@@ -4,27 +4,29 @@ import type { IRecord } from "@/@types/records";
 
 export const getCurrentCount = (
   counter: ICounter,
-  record?: IRecord
+  records: Array<IRecord>
 ): number => {
-  const recordCreatedAt = record?.createdAt;
-  if (!recordCreatedAt) return 0;
+  if (records.length === 0) return 0;
+  let filterStartRange: DateTime;
+  const filterEndRange = DateTime.now()
+    .set({ millisecond: -1, second: 0, minute: 0, hour: 0 })
+    .plus({ days: 1 });
 
-  const recordDate = DateTime.fromSeconds(recordCreatedAt);
   switch (counter.resetType) {
     case "Never":
-      return record?.latestValue || 0;
+      return records.reduce((p, c) => p + c.incrementValue, 0);
     default:
-      if (
-        recordDate
-          .startOf(counter.resetType.toLowerCase() as DateTimeUnit)
-          .toMillis() ===
-        DateTime.now()
-          .startOf(counter.resetType.toLowerCase() as DateTimeUnit)
-          .toMillis()
-      ) {
-        return record?.latestValue || 0;
-      } else return 0;
+      filterStartRange = DateTime.now().startOf(
+        counter.resetType.toLowerCase() as DateTimeUnit
+      );
   }
+
+  const filteredRecords = records.filter(
+    (r) =>
+      r.createdAt < filterEndRange.toSeconds() &&
+      r.createdAt > filterStartRange.toSeconds()
+  );
+  return filteredRecords.reduce((p, c) => p + c.incrementValue, 0);
 };
 
 export const getCounterTypeLabel = (counter: ICounter): string => {

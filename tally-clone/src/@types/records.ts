@@ -12,7 +12,6 @@ export const RecordSchema = z.object({
   id: z.string(),
   counterId: z.string(),
   incrementValue: RecordIncrementValue,
-  latestValue: z.number(),
   createdAt: z.number(),
   labels: z.array(z.string()),
   description: z.string(),

@@ -44,7 +44,6 @@
         id: nanoid(),
         counterId,
         incrementValue,
-        latestValue: counterValue + incrementValue,
         createdAt: DateTime.now().toSeconds(),
         labels: recordLabels,
         description,

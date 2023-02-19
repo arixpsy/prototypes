@@ -20,14 +20,14 @@
   export let counter: ICounter;
   export let isSortMode: boolean = false;
 
-  $: currentCount = getCurrentCount(counter, $latestRecord);
+  $: currentCount = getCurrentCount(counter, $counterRecords);
   $: counterTypeLabel = getCounterTypeLabel(counter);
 
   const dispatch = createEventDispatcher<{
     "custom-increment": CustomIncrementEvent;
   }>();
-  const latestRecord = derived(records, ($records) =>
-    $records.find((record) => record.counterId == counter.id)
+  const counterRecords = derived(records, ($records) =>
+    $records.filter((record) => record.counterId === counter.id)
   );
 
   function handleKeyPress(e: KeyboardEvent) {
@@ -56,7 +56,6 @@
       id: nanoid(),
       counterId: counter.id,
       incrementValue,
-      latestValue: currentCount + incrementValue,
       createdAt: DateTime.now().toSeconds(),
       labels: [],
       description: "",
