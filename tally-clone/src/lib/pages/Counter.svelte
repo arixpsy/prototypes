@@ -69,7 +69,11 @@
     <p class="pt-6 text-center text-4xl">
       {$chartData
         .find((d) => d.end === selectedDate)
-        ?.data.reduce((p, c) => p + c.incrementValue, 0)}
+        ?.data.reduce((p, c) => p + c.incrementValue, 0)
+        .toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+        })}
     </p>
 
     <CounterBarChart data={$chartData} color={counter?.color} />

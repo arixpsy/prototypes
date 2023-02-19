@@ -14,8 +14,18 @@
     {counterTitle}
   </p>
   <p class="my-3 flex items-center justify-center space-x-3 text-3xl font-bold">
-    <span class="line-through">{counterValue}</span>
+    <span class="line-through"
+      >{counterValue.toLocaleString(undefined, {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 0,
+      })}</span
+    >
     <Icon.ChevronRight />
-    <span>{counterValue + increment}</span>
+    <span
+      >{(counterValue + increment).toLocaleString(undefined, {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 0,
+      })}</span
+    >
   </p>
 </div>
