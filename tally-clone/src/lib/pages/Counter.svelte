@@ -6,8 +6,7 @@
   import { DateTime } from "luxon";
   import { derived } from "svelte/store";
   import type { IRecord } from "@/@types/records";
-  import { Icon } from "@/lib/components";
-    import CounterBarChart from "@/lib/components/CounterBarChart/CounterBarChart.svelte";
+  import { Icon, CounterBarChart } from "@/lib/components";
 
   export let currentRoute: Route;
   let size = 14;
@@ -55,8 +54,6 @@
     }
     return final;
   });
-
-  
 </script>
 
 <main class="min-h-screen bg-white">
@@ -64,7 +61,7 @@
     <h1
       class="sticky top-0 z-30 bg-white py-3  text-center text-4xl"
       class:shadow-lg={scrollY > 36}
-      in:fade 
+      in:fade
     >
       {counter?.title}
     </h1>
@@ -75,11 +72,10 @@
         ?.data.reduce((p, c) => p + c.incrementValue, 0)}
     </p>
 
-    <CounterBarChart data={$chartData} />
-    
+    <CounterBarChart data={$chartData} color={counter?.color} />
+
     <p class="pt-6 text-center">
-      Records: {$chartData.find((d) => d.end === selectedDate)?.data
-        .length}
+      Records: {$chartData.find((d) => d.end === selectedDate)?.data.length}
     </p>
 
     <!-- NAVIGATION TO HOME-->

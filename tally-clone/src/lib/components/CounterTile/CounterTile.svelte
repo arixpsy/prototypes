@@ -72,7 +72,7 @@
 </script>
 
 <div
-  class="relative flex aspect-square select-none flex-col items-center justify-center rounded-lg p-2"
+  class="relative flex aspect-square select-none flex-col items-center justify-center overflow-x-hidden rounded-lg p-2"
   class:cursor-pointer={!isSortMode}
   class:cursor-grab={isSortMode}
   style="background-color: {counter.color}"
@@ -102,9 +102,15 @@
   {#key currentCount}
     <p class="my-3 w-full text-center text-3xl font-bold" in:scale|local>
       {#if counter.target}
-        {currentCount}/{counter.target}
+        {currentCount.toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+        })}/{counter.target}
       {:else}
-        {currentCount}
+        {currentCount.toLocaleString(undefined, {
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 0,
+        })}
       {/if}
     </p>
   {/key}

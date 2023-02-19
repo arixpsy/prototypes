@@ -3,9 +3,10 @@
   import { onMount } from "svelte";
   import * as d3 from "d3";
   import { DateTime } from "luxon";
+  import { COUNTER_COLOR } from "@/@types/counters";
   import colors from "tailwindcss/colors";
-  import type { DefaultColors } from "tailwindcss/types/generated/colors";
 
+  export let color: string = COUNTER_COLOR[0];
   export let data: Array<{
     index: number;
     start: number;
@@ -67,7 +68,7 @@
       .attr("x", (v) => xScale(v.index))
       .attr("y", yScale(0))
       .attr("rx", 5)
-      .attr("fill", colors.blue[400])
+      .attr("fill", color)
       .attr("transform", `translate(${X_OFFSET_BAR}, ${PADDING.TOP})`)
       .transition()
       .duration(750)
@@ -90,8 +91,10 @@
         d3
           .axisBottom(xScale)
           .ticks(numOfRecords)
-          .tickFormat((v, i) => i !== numOfRecords - 1 ? 
-            DateTime.fromSeconds(data[v.valueOf()].end).toFormat("d LLL") : 'Today'
+          .tickFormat((v, i) =>
+            i !== numOfRecords - 1
+              ? DateTime.fromSeconds(data[v.valueOf()].end).toFormat("d LLL")
+              : "Today"
           )
       )
       .call((g) => g.select(".domain").remove())
@@ -114,7 +117,7 @@
           .attr("text-anchor", "start")
           .attr("transform", "translate(0, -5)")
           .attr("color", colors.gray[400])
-          .attr('font-size', '0.725em')
+          .attr("font-size", "0.725em")
       )
       .attr("transform", `translate(${PADDING.LEFT}, ${PADDING.TOP})`);
   });
