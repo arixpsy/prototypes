@@ -12,6 +12,9 @@
   import { counters } from "@/lib/store/counters";
   import { KEY_EVENT } from "@/@types/commons";
   import type { CustomIncrementEvent } from "@/@types/records";
+  import { onMount } from "svelte";
+  import colors from "tailwindcss/colors";
+  import type { DefaultColors } from "tailwindcss/types/generated/colors";
 
   // TODO: edit counter, individual counter state
 
@@ -86,6 +89,27 @@
   function handleDndFinalize(e: CustomEvent) {
     $counters = e.detail.items;
   }
+
+  // TODO: remove after migration
+  function handleMigrateData() {
+    const finalData = [];
+    for (const counter of $counters) {
+      const twColor: Array<string> = counter.color.split("-");
+      if (twColor.length === 3) {
+        finalData.push({
+          ...counter,
+          color: colors[twColor[1]][twColor[2] as string],
+        });
+      } else {
+        finalData.push(counter);
+      }
+    }
+    $counters = finalData
+  }
+
+  onMount(() => {
+    handleMigrateData();
+  });
 </script>
 
 <svelte:window on:keyup={handleGlobalKeyUp} bind:scrollY />
@@ -112,7 +136,7 @@
         dragDisabled: !isSortMode,
         dropTargetStyle: {},
         centreDraggedOnCursor: true,
-        zoneTabIndex: -1
+        zoneTabIndex: -1,
       }}
       on:consider={handleDndConsider}
       on:finalize={handleDndFinalize}
