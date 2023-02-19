@@ -24,8 +24,9 @@
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <label
   tabindex="0"
-  class={`h-8 w-8 rounded-full ${value} flex cursor-pointer items-center justify-center`}
+  class={`h-8 w-8 rounded-full flex cursor-pointer items-center justify-center`}
   class:onSelected={isSelected}
+  style='background-color: {value}'
   on:keyup={handleKeyUp}
 >
   <div

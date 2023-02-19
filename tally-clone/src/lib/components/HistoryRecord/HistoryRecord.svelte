@@ -91,7 +91,8 @@
       out:fade
     >
       <div
-        class="w-max whitespace-nowrap rounded-md {counter?.color} px-2 py-0.5 text-sm text-white"
+        class="w-max whitespace-nowrap rounded-md px-2 py-0.5 text-sm text-white"
+        style="background-color: {counter?.color}"
       >
         +{record.incrementValue}
         {counter?.title}

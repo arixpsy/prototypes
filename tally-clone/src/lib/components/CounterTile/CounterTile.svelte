@@ -14,8 +14,8 @@
   } from "@/lib/components/CounterTile/utils";
   import { Icon } from "@/lib/components";
   import { counters } from "@/lib/store/counters";
-    import { longpress } from "@/lib/actions/longpress";
-    import { navigateTo } from "svelte-router-spa";
+  import { longpress } from "@/lib/actions/longpress";
+  import { navigateTo } from "svelte-router-spa";
 
   export let counter: ICounter;
   export let isSortMode: boolean = false;
@@ -72,9 +72,10 @@
 </script>
 
 <div
-  class="relative flex aspect-square flex-col items-center justify-center rounded-lg p-2 {counter.color} select-none"
+  class="relative flex aspect-square select-none flex-col items-center justify-center rounded-lg p-2"
   class:cursor-pointer={!isSortMode}
   class:cursor-grab={isSortMode}
+  style="background-color: {counter.color}"
   tabIndex={isSortMode ? -1 : 0}
   on:click={isSortMode ? undefined : handleClickCounter}
   on:keyup={isSortMode ? undefined : handleKeyPress}
