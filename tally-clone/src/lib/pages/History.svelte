@@ -66,3 +66,9 @@
     </div>
   </div>
 </main>
+
+<style>
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
