@@ -14,7 +14,6 @@
   import type { CustomIncrementEvent } from "@/@types/records";
   import { onMount } from "svelte";
   import colors from "tailwindcss/colors";
-  import type { DefaultColors } from "tailwindcss/types/generated/colors";
 
   // TODO: edit counter, individual counter state
 
