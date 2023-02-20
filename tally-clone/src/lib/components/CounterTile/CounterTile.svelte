@@ -99,7 +99,7 @@
   </p>
   <p class="w-full text-center text-xs">{counterTypeLabel}</p>
   {#key currentCount}
-    <p class="my-3 w-full text-center text-3xl font-bold overflow-x-hidden" in:scale|local>
+    <p class="my-3 w-full text-center text-3xl font-bold overflow-x-hidden overflow-y-clip" in:scale|local>
       {#if counter.target}
         {currentCount.toLocaleString(undefined, {
           maximumFractionDigits: 2,
