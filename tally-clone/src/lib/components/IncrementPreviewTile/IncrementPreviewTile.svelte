@@ -8,7 +8,8 @@
 </script>
 
 <div
-  class="flex aspect-square flex-col items-center justify-center self-center rounded-lg p-2 {counterColor} w-full max-w-xs"
+  class="flex aspect-square flex-col items-center justify-center self-center rounded-lg p-2 w-full max-w-xs"
+  style='background-color: {counterColor}'
 >
   <p class="w-full truncate text-center text-3xl text-gray-100">
     {counterTitle}
