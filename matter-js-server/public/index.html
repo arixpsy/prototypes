@@ -1,0 +1,41 @@
+<body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+	<script>
+		const canvas = document.createElement('canvas')
+		document.body.appendChild(canvas)
+		const ctx = canvas.getContext('2d')
+		const socket = io()
+
+		const draw = (body, ctx) => {
+			ctx.beginPath()
+			body.forEach((e) => ctx.lineTo(e.x, e.y))
+			ctx.closePath()
+			ctx.fill()
+			ctx.stroke()
+		}
+
+		socket.once('connect', () => {
+			socket.emit('register', (res) => {
+				canvas.width = res.width
+				canvas.height = res.height
+			})
+		})
+
+		socket.on('update state', ({ platforms, walls, players }) => {
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			ctx.fillStyle = '#111'
+			ctx.strokeStyle = '#111'
+			walls.forEach((wall) => draw(wall, ctx))
+      
+			ctx.fillStyle = '#aaa'
+			platforms.forEach((p) => draw(p, ctx))
+
+			ctx.fillStyle = 'rgba(0, 0, 255, 0.2)'
+			Object.values(players).forEach((p) => draw(p, ctx))
+		})
+
+		// document.addEventListener("mousedown", e => {
+		//   socket.emit("player click", {x: e.offsetX, y: e.offsetY});
+		// });
+	</script>
+</body>
