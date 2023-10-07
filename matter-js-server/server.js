@@ -60,7 +60,7 @@ const ForestConfig = {
 }
 
 const MapEngines = {
-	FOREST: Matter.Engine.create(),
+	FOREST: Matter.Engine.create({ gravity: { x: 0, y: 1, scale: 0.004 } }),
 }
 
 const MapEntities = {
@@ -79,36 +79,75 @@ const toVertices = (e) => e.vertices.map(({ x, y }) => ({ x, y }))
 const frameRate = 1000 / 30
 
 setInterval(() => {
+	for (const key of Object.keys(MapEntities.FOREST.PLAYERS)) {
+		const { command, body, isInAir } = MapEntities.FOREST.PLAYERS[key]
+		if (command) {
+      if (command.jump && !isInAir) {
+        MapEntities.FOREST.PLAYERS[key].isInAir = true
+				Matter.Body.applyForce(body, body.position ,{ x: 0, y: -0.085 })
+			}
+
+      if (isInAir && parseFloat(body.velocity.y.toFixed(10)) === 0) {
+        MapEntities.FOREST.PLAYERS[key].isInAir = false
+      }
+
+			const position = { ...body.position }
+			if (command.right && !command.left) {
+				position.x += 9
+			} else if (!command.right && command.left) {
+				position.x -= 9
+			}
+			Matter.Body.setPosition(body, position)
+		}
+	}
+
 	Matter.Engine.update(MapEngines.FOREST, frameRate)
 
-  const players = {}
-  for (const key of Object.keys(MapEntities.FOREST.PLAYERS)) {
-    players[key] = toVertices(MapEntities.FOREST.PLAYERS[key])
-  }
+	const players = {}
+	for (const key of Object.keys(MapEntities.FOREST.PLAYERS)) {
+		players[key] = toVertices(MapEntities.FOREST.PLAYERS[key].body)
+	}
+
 	io.emit('update state', {
 		walls: MapEntities.FOREST.WALLS.map(toVertices),
 		platforms: MapEntities.FOREST.PLATFORMS.map(toVertices),
-    players
+		players,
 	})
 }, frameRate)
 
 io.on('connection', (socket) => {
 	console.log(`🟢 A user connected: ${socket.id}`)
 
-	MapEntities.FOREST.PLAYERS[socket.id] = Matter.Bodies.rectangle(
-		ForestConfig.spawn.x,
-		ForestConfig.spawn.y,
-		100,
-		100
+	MapEntities.FOREST.PLAYERS[socket.id] = {
+		body: Matter.Bodies.rectangle(
+			ForestConfig.spawn.x,
+			ForestConfig.spawn.y,
+			50,
+			50,
+			{
+				inertia: Infinity,
+			}
+		),
+	}
+	MapEntities.FOREST.PLAYERS[socket.id].body.collisionFilter.group = -1
+	MapEntities.FOREST.PLAYERS[socket.id].body.friction = 0
+	Matter.Composite.add(
+		MapEngines.FOREST.world,
+		MapEntities.FOREST.PLAYERS[socket.id].body
 	)
-  MapEntities.FOREST.PLAYERS[socket.id].collisionFilter.group = -1
-  Matter.Composite.add(MapEngines.FOREST.world, MapEntities.FOREST.PLAYERS[socket.id])
 
-  socket.on('disconnect', function () {
-    console.log(`⛔ A user disconnected: ${socket.id}`)
-    Matter.Composite.remove(MapEngines.FOREST.world, MapEntities.FOREST.PLAYERS[socket.id])
-    delete MapEntities.FOREST.PLAYERS[socket.id]
-  })
+	socket.on('disconnect', function () {
+		console.log(`⛔ A user disconnected: ${socket.id}`)
+		Matter.Composite.remove(
+			MapEngines.FOREST.world,
+			MapEntities.FOREST.PLAYERS[socket.id].body
+		)
+		delete MapEntities.FOREST.PLAYERS[socket.id]
+	})
+
+	socket.on('userCommands', function (data) {
+		MapEntities.FOREST.PLAYERS[socket.id].command = data
+	})
 
 	socket.on('register', (cb) => cb(ForestConfig.dimensions))
 })

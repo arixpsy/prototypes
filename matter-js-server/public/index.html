@@ -26,7 +26,7 @@
 			ctx.fillStyle = '#111'
 			ctx.strokeStyle = '#111'
 			walls.forEach((wall) => draw(wall, ctx))
-      
+
 			ctx.fillStyle = '#aaa'
 			platforms.forEach((p) => draw(p, ctx))
 
@@ -34,8 +34,80 @@
 			Object.values(players).forEach((p) => draw(p, ctx))
 		})
 
-		// document.addEventListener("mousedown", e => {
-		//   socket.emit("player click", {x: e.offsetX, y: e.offsetY});
-		// });
+		const userInput = {
+			up: false,
+			down: false,
+			left: false,
+			right: false,
+      jump: false,
+		}
+		let justPressed = false
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'a') {
+				if (userInput.left === false) {
+					justPressed = true
+				}
+				userInput.left = true
+			}
+			if (e.key === 'w') {
+				if (userInput.up === false) {
+					justPressed = true
+				}
+				userInput.up = true
+			}
+			if (e.key === 'd') {
+				if (userInput.right === false) {
+					justPressed = true
+				}
+				userInput.right = true
+			}
+			if (e.key === 's') {
+				if (userInput.down === false) {
+					justPressed = true
+				}
+				userInput.down = true
+			}
+      if (e.key === ' ') {
+				if (userInput.jump === false) {
+					justPressed = true
+				}
+				userInput.jump = true
+			}
+			if (justPressed === true) {
+				emitUserCommands(userInput)
+				justPressed = false
+			}
+		})
+
+		document.addEventListener('keyup', (e) => {
+			if (e.key === 'a') {
+				userInput.left = false
+			}
+			if (e.key === 'w') {
+				userInput.up = false
+			}
+			if (e.key === 'd') {
+				userInput.right = false
+			}
+			if (e.key === 's') {
+				userInput.down = false
+			}
+      if (e.key === ' ') {
+				userInput.jump = false
+			}
+			emitUserCommands(userInput)
+		})
+
+    function emitUserCommands(obj){
+    let userCommands = {
+        left: obj.left,
+        up: obj.up,
+        right: obj.right,
+        down: obj.down,
+        jump: obj.jump,
+    }
+    socket.emit('userCommands', userCommands);
+}
 	</script>
 </body>
