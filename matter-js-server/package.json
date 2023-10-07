@@ -2,7 +2,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "bun run --watch server.js",
-    "start": "bun server.js"
+    "start": "bun server.js",
+    "node:start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
